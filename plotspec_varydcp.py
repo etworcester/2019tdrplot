@@ -130,7 +130,7 @@ t1.Draw("same")
 l1.Draw("same")
 l2.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_app_nu_varydcp.png")
+c1.SaveAs("plot/spec_app_nu_varydcp.eps")
 
 #Anti-nu
 h = specfile.Get("nue_rhc_nh_0pi").Rebin(2)
@@ -234,5 +234,5 @@ t1.Draw("same")
 l1.Draw("same")
 l2.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_app_anu_varydcp.png")
+c1.SaveAs("plot/spec_app_anu_varydcp.eps")
 
