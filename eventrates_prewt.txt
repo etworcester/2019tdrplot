@@ -1,0 +1,78 @@
+Appearance FHC, NH
+Signal:  1365.13089279 1365.13089279
+Signal (nu):  1345.75816466
+Signal (anu):  19.3727281275
+NC:  83.1579315531
+numu:  16.8527893002
+nutau:  36.6716939014
+beam nue:  234.068881191
+Total all energies:  1749.34156982
+Info in <TCanvas::Print>: eps file plot/spec_app_nu.eps has been created
+
+Appearance RHC, NH
+Signal:  337.038570249 337.038570249
+Signal (nu):  91.2549751872
+Signal (anu):  245.783595062
+NC:  38.8653466221
+numu:  5.62450525636
+nutau:  22.3327676746
+beam nue:  135.291344351
+Total all energies:  544.425393307
+Info in <TCanvas::Print>: eps file plot/spec_app_anu.eps has been created
+
+Disappearance FHC, NH
+Signal:  7646.25913105 7646.25913105
+NC:  206.02321071
+nutau:  53.3432559664
+wrong sign:  434.172386707
+nue:  9.28592484485
+Info in <TCanvas::Print>: eps file plot/spec_dis_nu.eps has been created
+
+Disappearance RHC, NH
+Signal:  2574.93130362 2574.93130362
+NC:  101.343939347
+nutau:  31.368048817
+wrong sign:  1330.47217448
+nue:  1.69613909113
+Info in <TCanvas::Print>: eps file plot/spec_dis_anu.eps has been created
+
+Appearance FHC, IH
+Signal:  646.497053952 646.497053952
+Signal (nu):  612.377113
+Signal (anu):  34.1199409523
+NC:  83.1579315531
+numu:  17.2197123354
+nutau:  37.3442069008
+beam nue:  241.521097875
+Total all energies:  1033.05847748
+Info in <TCanvas::Print>: eps file plot/spec_app_nu_ih.eps has been created
+
+Appearance RHC, IH
+Signal:  558.903807408 558.903807408
+Signal (nu):  43.6481779041
+Signal (anu):  515.255629503
+NC:  38.8653466221
+numu:  5.63362595751
+nutau:  22.4760941335
+beam nue:  134.440062935
+Total all energies:  763.649545854
+TCanvas::Constructor:0: RuntimeWarning: Deleting canvas with same name: c1
+Info in <TCanvas::Print>: eps file plot/spec_app_anu_ih.eps has been created
+
+Disappearance FHC, IH
+Signal:  7804.7975486 7804.7975486
+NC:  206.02321071
+nutau:  54.3258470068
+wrong sign:  433.718113781
+nue:  5.48943482054
+TCanvas::Constructor:0: RuntimeWarning: Deleting canvas with same name: c1
+Info in <TCanvas::Print>: eps file plot/spec_dis_nu_ih.eps has been created
+
+Disappearance RHC, IH
+Signal:  2549.35598295 2549.35598295
+NC:  101.343939347
+nutau:  31.5849928643
+wrong sign:  1341.75004102
+nue:  1.86357782486
+TCanvas::Constructor:0: RuntimeWarning: Deleting canvas with same name: c1
+Info in <TCanvas::Print>: eps file plot/spec_dis_anu_ih.eps has been created

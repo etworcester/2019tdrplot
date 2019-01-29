@@ -27,7 +27,7 @@ def geterrors(h):
         i+=1
 
     
-specfile = ROOT.TFile("root/spec_hist.root")
+specfile = ROOT.TFile("root/spec_hist_v3_wt.root")
 
 h = specfile.Get("nue_fhc_nh_0pi").Rebin(2)
 h_dcppos = specfile.Get("nue_fhc_nh_piover2").Rebin(2)
@@ -116,7 +116,7 @@ l2.SetBorderSize(0)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
-h1 = c1.DrawFrame(0.5,0.,8.,200.)
+h1 = c1.DrawFrame(0.5,0.,8.,175.)
 h1.GetXaxis().SetTitle("Reconstructed Energy (GeV)")
 h1.GetYaxis().SetTitle("Events per 0.25 GeV")
 h1.GetYaxis().SetTitleOffset(1.5)
