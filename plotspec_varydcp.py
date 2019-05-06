@@ -220,7 +220,7 @@ l2.SetBorderSize(0)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
-h1 = c1.DrawFrame(0.5,0.,8.,50.)
+h1 = c1.DrawFrame(0.5,0.,8.,75.)
 h1.GetXaxis().SetTitle("Reconstructed Energy (GeV)")
 h1.GetYaxis().SetTitle("Events per 0.25 GeV")
 h1.GetYaxis().SetTitleOffset(1.5)

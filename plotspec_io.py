@@ -90,7 +90,7 @@ print "Total all energies: ", ntot
 
 t1 = ROOT.TPaveText(0.55,0.7,0.89,0.89,"NDC")
 t1.AddText("DUNE #nu_{e} Appearance")
-t1.AddText("Normal Ordering")
+t1.AddText("Inverted Ordering")
 t1.AddText("#delta_{CP} = 0, sin^{2}2#theta_{13} = 0.088")
 t1.AddText("sin^{2}#theta_{23} = 0.580")
 t1.AddText("3.5 years (staged)")
@@ -120,7 +120,7 @@ hs.Draw("same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_app_nu_ih.eps")
+c1.SaveAs("plot/spec_app_nu_io.eps")
 
 #Appearance RHC
 h = specfile.Get("nue_rhc_ih_0pi").Rebin(2)
@@ -183,7 +183,7 @@ print "Total all energies: ", ntot
 
 t1 = ROOT.TPaveText(0.55,0.7,0.89,0.89,"NDC")
 t1.AddText("DUNE #bar{#nu}_{e} Appearance")
-t1.AddText("Normal Ordering")
+t1.AddText("Inverted Ordering")
 t1.AddText("#delta_{CP} = 0, sin^{2}2#theta_{13} = 0.088")
 t1.AddText("sin^{2}#theta_{23} = 0.580")
 t1.AddText("3.5 years (staged)")
@@ -202,7 +202,7 @@ l1.SetBorderSize(0)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
-h1 = c1.DrawFrame(0.5,0.,8.,50.)
+h1 = c1.DrawFrame(0.5,0.,8.,75.)
 h1.GetXaxis().SetTitle("Reconstructed Energy (GeV)")
 h1.GetYaxis().SetTitle("Events per 0.25 GeV")
 h1.GetYaxis().SetTitleOffset(1.5)
@@ -213,7 +213,7 @@ hs.Draw("same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_app_anu_ih.eps")
+c1.SaveAs("plot/spec_app_anu_io.eps")
 
 #Disappearance FHC
 h = specfile.Get("numu_fhc_ih_0pi").Rebin(2)
@@ -297,7 +297,7 @@ h.Draw("E,same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_dis_nu_ih.eps")
+c1.SaveAs("plot/spec_dis_nu_io.eps")
 
 
 #Disappearance RHC
@@ -382,6 +382,6 @@ h.Draw("E,same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_dis_anu_ih.eps")
+c1.SaveAs("plot/spec_dis_anu_io.eps")
 
 
