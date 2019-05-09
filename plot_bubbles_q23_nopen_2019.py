@@ -92,7 +92,7 @@ for plot in list7yr:
     plot.SetContour(1)
     plot.SetContourLevel(0,4.61)
     plot.SetLineWidth(3)
-    plot.SetLineColor(ROOT.kGreen-7)
+    plot.SetLineColor(ROOT.kBlue-7)
     plot.Draw("cont3 same")
 
 for plot in list10yr:
@@ -106,7 +106,7 @@ for plot in list15yr:
     plot.SetContour(1)
     plot.SetContourLevel(0,4.61)
     plot.SetLineWidth(3)
-    plot.SetLineColor(ROOT.kBlue-7)
+    plot.SetLineColor(ROOT.kGreen-7)
     plot.Draw("cont3 same")
 
 s1 = ROOT.TMarker(-0.5,0.5,29)

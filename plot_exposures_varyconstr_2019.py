@@ -305,14 +305,14 @@ t3sig.AddText("3#sigma")
 t3sig.SetFillColor(0)
 t3sig.SetFillStyle(0)
 t3sig.SetBorderSize(0)
-t3sig.Draw("same")
+#t3sig.Draw("same")
 
 t5sig = ROOT.TPaveText(10.,5.1,115.,5.7)
 t5sig.AddText("5#sigma")
 t5sig.SetFillColor(0)
 t5sig.SetFillStyle(0)
 t5sig.SetBorderSize(0)
-t5sig.Draw("same")
+#t5sig.Draw("same")
 
 outname = "plot/exposures/cpv_exp_varyconstr_"+hier+"_2019.eps"
 outname2 = "plot/exposures/cpv_exp_varyconstr_"+hier+"_2019.png"

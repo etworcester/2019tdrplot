@@ -29,10 +29,10 @@ else:
       print "Must supply nh or ih!"
       exit()
 
-#f1text = "root_callum/cpv_throw_ndfd7year_allsyst_th13_hie1_stat:fake:start_v3_BAND.root"
-#f1 = ROOT.TFile(f1text)
-#band1 = f1.Get("throws_rms")
-#m1 = f1.Get("throws_mean") 
+f1text = "root_callum/cpv_throw_ndfd7year_allsyst_th13_hie1_stat:fake:start_v3_BAND.root"
+f1 = ROOT.TFile(f1text)
+band1 = f1.Get("throws_rms")
+m1 = f1.Get("throws_mean") 
 f1a = ROOT.TFile("root_callum/cpv_sens_ndfd_336kTMWyr_allsyst_th13_hie1_v3.root")
 cpv1 = f1a.Get("sens_cpv_"+hier)
 
@@ -45,27 +45,25 @@ f2a = ROOT.TFile("root_callum/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root"
 cpv2 = f2a.Get("sens_cpv_"+hier)
 
 cpv1.SetLineWidth(3)
-cpv1.SetLineColor(ROOT.kGreen-7)
+cpv1.SetLineColor(ROOT.kBlue-7)
 cpv2.SetLineWidth(3)
 cpv2.SetLineColor(ROOT.kOrange-3)
 
-#m1.SetLineWidth(3)
-#m1.SetLineStyle(2)
-#m1.SetLineColor(ROOT.kGreen-7)
+m1.SetLineWidth(3)
+m1.SetLineStyle(2)
+m1.SetLineColor(ROOT.kBlue-7)
 m2.SetLineWidth(3)
 m2.SetLineStyle(2)
 m2.SetLineColor(ROOT.kOrange-3)
 
+band1.SetFillStyle(3001)
+band2.SetFillStyle(3001)
 
-#band1.SetFillColor(ROOT.kGreen-7)
-band2.SetFillColor(ROOT.kOrange-3)
+band1.SetFillColorAlpha(ROOT.kBlue-1,0.5)
+band2.SetFillColorAlpha(ROOT.kOrange-4,1.0)
 
-#band1.SetLineColor(0)
+band1.SetLineColor(0)
 band2.SetLineColor(0)
-
-#band1.SetFillStyle(3006)
-band2.SetFillStyle(3006)
-
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
@@ -77,10 +75,10 @@ h1.GetYaxis().SetTitle("#sigma = #sqrt{#bar{#Delta#chi^{2}}}")
 h1.GetYaxis().SetTitleOffset(1.3)
 h1.GetYaxis().CenterTitle()
 c1.Modified()
-#band1.Draw("e4 same")
-#m1.Draw("same")
-cpv1.Draw("same")
 band2.Draw("e4 same")
+band1.Draw("e4 same")
+m1.Draw("same")
+cpv1.Draw("same")
 cpv2.Draw("same")
 m2.Draw("same")
 ROOT.gPad.RedrawAxis()

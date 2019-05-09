@@ -68,7 +68,7 @@ ROOT.gStyle.SetPalette(1,colors)
 hist1.SetContour(1)
 hist1.SetContourLevel(0,4.61)
 hist1.SetLineWidth(3)
-hist1.SetLineColor(ROOT.kGreen-7)
+hist1.SetLineColor(ROOT.kBlue-7)
 hist1.Draw("cont3 same")
 
 hist2.SetContour(1)
@@ -80,7 +80,7 @@ hist2.Draw("cont3 same")
 hist3.SetContour(1)
 hist3.SetContourLevel(0,4.61)
 hist3.SetLineWidth(3)
-hist3.SetLineColor(ROOT.kBlue-7)
+hist3.SetLineColor(ROOT.kGreen-7)
 hist3.Draw("cont3 same")
 
 dcptrue = (215.*math.pi/180 - 2*math.pi)/math.pi

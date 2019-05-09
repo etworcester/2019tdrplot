@@ -69,11 +69,11 @@ dcpz1.SetLineWidth(3)
 dcpz2.SetLineWidth(3)
 dcpz3.SetLineWidth(3)
 
-dcpz1.SetLineColor(ROOT.kGreen-7)
+dcpz1.SetLineColor(ROOT.kBlue-7)
 
 dcpz2.SetLineColor(ROOT.kOrange-3)
 
-dcpz3.SetLineColor(ROOT.kBlue-7)
+dcpz3.SetLineColor(ROOT.kGreen-7)
 
 dcpz1.SetContour(1)
 dcpz1.SetContourLevel(0,4.61)

@@ -23,39 +23,40 @@ ROOT.gStyle.SetTitleSize(0.03,"t")
 hier = sys.argv[1]
 if (hier == 'nh'):
       htext = "Normal Ordering"
+      hiestr = "hie1"
 elif (hier == 'ih'):
       htext = "Inverted Ordering"
+      hiestr = "hie-1"
 else:
       print "Must supply nh or ih!"
       exit()
 
-#f1text = "root_callum/cpv_throw_ndfd7year_allsyst_th13_hie1_stat:fake:start_v3_BAND.root"
-#f1 = ROOT.TFile(f1text)
-#band1 = f1.Get("throws_rms")
-f1a = ROOT.TFile("root_callum/cpv_sens_ndfd_336kTMWyr_allsyst_th13_hie1_v3.root")
+f1text = "root_callum/cpv_throw_ndfd7year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
+f1 = ROOT.TFile(f1text)
+band1 = f1.Get("throws_rms")
+f1a = ROOT.TFile("root_callum/cpv_sens_ndfd_336kTMWyr_allsyst_th13_"+hiestr+"_v3.root")
 cpv1 = f1a.Get("sens_cpv_"+hier)
 
 
-f2text = "root_callum/cpv_throw_ndfd10year_allsyst_th13_hie1_stat:fake:start_v3_BAND.root"
+f2text = "root_callum/cpv_throw_ndfd10year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
 f2 = ROOT.TFile(f2text)
 band2 = f2.Get("throws_rms")
-f2a = ROOT.TFile("root_callum/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root")
+f2a = ROOT.TFile("root_callum/cpv_sens_ndfd_624kTMWyr_allsyst_th13_"+hiestr+"_v3.root")
 cpv2 = f2a.Get("sens_cpv_"+hier)
 
-cpv1.SetLineWidth(3)
-cpv1.SetLineColor(ROOT.kGreen-7)
-cpv2.SetLineWidth(3)
+cpv1.SetLineWidth(4)
+cpv1.SetLineColor(ROOT.kBlue-7)
+cpv2.SetLineWidth(4)
 cpv2.SetLineColor(ROOT.kOrange-3)
 
-#band1.SetFillColor(ROOT.kGreen-7)
-band2.SetFillColor(ROOT.kOrange-3)
+band1.SetFillStyle(3001)
+band2.SetFillStyle(3001)
 
-#band1.SetLineColor(0)
+band1.SetFillColorAlpha(ROOT.kBlue-1,0.5)
+band2.SetFillColorAlpha(ROOT.kOrange-4,1.0)
+
+band1.SetLineColor(0)
 band2.SetLineColor(0)
-
-#band1.SetFillStyle(3006)
-band2.SetFillStyle(3006)
-
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
@@ -67,9 +68,9 @@ h1.GetYaxis().SetTitle("#sigma = #sqrt{#bar{#Delta#chi^{2}}}")
 h1.GetYaxis().SetTitleOffset(1.3)
 h1.GetYaxis().CenterTitle()
 c1.Modified()
-#band1.Draw("e4 same")
-cpv1.Draw("same")
 band2.Draw("e4 same")
+band1.Draw("e4 same")
+cpv1.Draw("same")
 cpv2.Draw("same")
 ROOT.gPad.RedrawAxis()
 
@@ -88,12 +89,15 @@ t1.SetTextAlign(12)
 t1.Draw("same")
 
 band_dum = band2.Clone()
-band_dum.SetFillColor(ROOT.kBlack)
+band_dum.SetFillColorAlpha(ROOT.kBlack,0.5)
+cpv_dum = cpv1.Clone()
+cpv_dum.SetLineColor(ROOT.kBlack)
 null = ROOT.TObject()
 
 l1 = ROOT.TLegend(0.5,0.7,0.89,0.89)
 l1.AddEntry(cpv1,"7 years (staged)", "L")
 l1.AddEntry(cpv2,"10 years (staged)", "L")
+l1.AddEntry(cpv_dum,"Asimov Set","L")
 l1.AddEntry(band_dum, "1#sigma variations of","F")
 l1.AddEntry(null,"statistics, systematics,","")
 l1.AddEntry(null,"and oscillation parameters","")

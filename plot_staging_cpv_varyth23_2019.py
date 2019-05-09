@@ -308,7 +308,7 @@ c1.SaveAs(outname2)
 
 c2 = ROOT.TCanvas("c2","c2",800,800)
 c2.SetLeftMargin(0.15)
-h2 = c2.DrawFrame(0,0.0,7.0,30.0)
+h2 = c2.DrawFrame(0,0.0,7.0,35.0)
 h2.SetTitle("Mass Ordering Sensitivity")
 h2.GetXaxis().SetTitle("Years")
 h2.GetYaxis().SetTitle("#sqrt{#bar{#Delta#chi^{2}}}")
@@ -345,6 +345,11 @@ if (hier == "nh"):
 l1.AddEntry(gdiff_staged_mh100, "100% of #delta_{CP} values","F")
 l1.SetBorderSize(0)
 l1.Draw("same")
+
+line3 = ROOT.TLine(0.0,5.,7.,5.)
+line3.SetLineStyle(2)
+line3.SetLineWidth(3)
+line3.Draw("same")
 
 outname = "plot/exposures/mh_exp_staging_varyth23_"+hier+"_2019.eps"
 outname2 = "plot/exposures/mh_exp_staging_varyth23_"+hier+"_2019.png"
