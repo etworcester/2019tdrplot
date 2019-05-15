@@ -152,7 +152,6 @@ for myexp in explist:
       mhlist100_hi.append(min(mh_vals_hi))
       mhlistbest_hi.append(mh_vals[cutbest])
       f1.Close()
-      
 
 n = len(explist)
 explist = array('d',explist)
@@ -206,6 +205,50 @@ g_mhsig_best_lo.SetLineWidth(3)
 g_mhsig_best_lo.SetLineStyle(3)
 g_mhsig_best_hi.SetLineWidth(3)
 
+
+graph_cpvrange75 = filldiff(g_cpvsig_75_hi,g_cpvsig_75_lo)
+graph_cpvrange50 = filldiff(g_cpvsig_50_hi,g_cpvsig_50_lo)
+graph_cpvbestrange = filldiff(g_cpvsig_best_hi,g_cpvsig_best_lo)
+
+graph_mhrange100 = filldiff(g_mhsig_100_hi, g_mhsig_100_lo)
+graph_mhrangebest = filldiff(g_mhsig_best_hi, g_mhsig_best_lo)
+
+f_resdcp = ROOT.TFile("root_chris/dcpres_vs_exposure.root")
+graph_dcpres0_noconstr = f_resdcp.Get("nopen_dcp0pi")
+graph_dcpres0_th13 = f_resdcp.Get("th13_dcp0pi")
+graph_dcpresneg_noconstr = f_resdcp.Get("nopen_dcp1.5pi")
+graph_dcpresneg_th13 = f_resdcp.Get("th13_dcp1.5pi")
+
+f_res = ROOT.TFile("root_chris/res_vs_exposure.root")
+graph_th13res_noconstr = f_res.Get("ss2th13_nopen")
+graph_th23res_noconstr = f_res.Get("ss2th23_nopen")
+graph_th23res_th13 = f_res.Get("ss2th23_th13")
+graph_dmsqres_noconstr = f_res.Get("dmsq32_nopen")
+graph_dmsqres_th13 = f_res.Get("dmsq32_th13")
+
+graph_diff_dcpres0 = filldiff(graph_dcpres0_noconstr,graph_dcpres0_th13)
+graph_diff_dcpresneg = filldiff(graph_dcpresneg_noconstr,graph_dcpresneg_th13)
+graph_diff_th23res = filldiff(graph_th23res_noconstr,graph_th23res_th13)
+graph_diff_dmsqres = filldiff(graph_dmsqres_noconstr,graph_dmsqres_th13)
+
+graph_dcpres0_noconstr.SetLineWidth(3)
+graph_dcpresneg_noconstr.SetLineWidth(3)
+graph_dcpresneg_noconstr.SetLineColor(ROOT.kBlack)
+graph_dcpres0_th13.SetLineWidth(3)
+graph_dcpresneg_th13.SetLineWidth(3)
+graph_dcpresneg_th13.SetLineColor(ROOT.kBlack)
+graph_th13res_noconstr.SetLineWidth(4)
+graph_th23res_noconstr.SetLineWidth(3)
+graph_dmsqres_noconstr.SetLineWidth(3)
+graph_th23res_th13.SetLineWidth(3)
+graph_dmsqres_th13.SetLineWidth(3)
+
+graph_dcpres0_noconstr.SetLineStyle(3)
+graph_dcpresneg_noconstr.SetLineStyle(3)
+graph_th13res_noconstr.SetLineStyle(3)
+graph_th23res_noconstr.SetLineStyle(3)
+graph_dmsqres_noconstr.SetLineStyle(3)
+
 myout = ROOT.TFile("root/exposure_graphs_"+hier+".root","recreate")
 g_cpvsig_75_lo.SetName("cpvsig75_nopen")
 g_cpvsig_50_lo.SetName("cpvsig50_nopen")
@@ -218,6 +261,18 @@ g_mhsig_best_lo.SetName("mhsigbest_nopen")
 g_mhsig_100_hi.SetName("mhsig100_th13pen")
 g_mhsig_best_hi.SetName("mhsigbest_th13pen")
 
+graph_dcpres0_noconstr.SetName("dcpres0_nopen")
+graph_dcpresneg_noconstr.SetName("dcpresneg_nopen")
+graph_dcpres0_th13.SetName("dcpres0_th13pen")
+graph_dcpresneg_th13.SetName("dcpresneg_th13pen")
+
+graph_th13res_noconstr.SetName("th13res_nopen")
+graph_th23res_noconstr.SetName("th23res_nopen")
+graph_dmsqres_noconstr.SetName("dmsqres_nopen")
+
+graph_th23res_th13.SetName("th23res_th13pen")
+graph_dmsqres_th13.SetName("dmsqres_th13pen")
+
 g_cpvsig_75_lo.Write()
 g_cpvsig_50_lo.Write()
 g_cpvsig_best_lo.Write()
@@ -228,15 +283,18 @@ g_mhsig_100_lo.Write()
 g_mhsig_best_lo.Write()
 g_mhsig_100_hi.Write()
 g_mhsig_best_hi.Write()
+graph_dcpres0_noconstr.Write()
+graph_dcpresneg_noconstr.Write()
+graph_dcpres0_th13.Write()
+graph_dcpresneg_th13.Write()
+graph_th13res_noconstr.Write()
+graph_th23res_noconstr.Write()
+graph_dmsqres_noconstr.Write()
+graph_th23res_th13.Write()
+graph_dmsqres_th13.Write()
 
 myout.Close()
 
-graph_cpvrange75 = filldiff(g_cpvsig_75_hi,g_cpvsig_75_lo)
-graph_cpvrange50 = filldiff(g_cpvsig_50_hi,g_cpvsig_50_lo)
-graph_cpvbestrange = filldiff(g_cpvsig_best_hi,g_cpvsig_best_lo)
-
-graph_mhrange100 = filldiff(g_mhsig_100_hi, g_mhsig_100_lo)
-graph_mhrangebest = filldiff(g_mhsig_best_hi, g_mhsig_best_lo)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
@@ -275,7 +333,7 @@ if (hier == 'nh'):
 elif (hier == 'ih'):
       t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
       t1.AddText("sin^{2}#theta_{23} = 0.583 unconstrained")
-t1.SetFillColor(0)
+t1.SetFillStyle(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)
 t1.Draw("same")
@@ -352,9 +410,160 @@ lm1.SetBorderSize(0)
 lm1.SetFillStyle(0)
 lm1.Draw("same")
 
+line3 = ROOT.TLine(0.0,5.,500.,5.)
+line3.SetLineStyle(2)
+line3.SetLineWidth(3)
+line3.Draw("same")
+
 outname = "plot/exposures/mh_exp_varyconstr_"+hier+"_2019.eps"
 outname2 = "plot/exposures/mh_exp_varyconstr_"+hier+"_2019.png"
 c2.SaveAs(outname)
 c2.SaveAs(outname2)
 
+if (hier == "nh"):
+
+      c3 = ROOT.TCanvas("c3","c3",800,800)
+      c3.SetLeftMargin(0.15)
+      h3 = c3.DrawFrame(0,0.0,1500.,60.)
+      h3.SetTitle("")
+      h3.GetXaxis().SetTitle("Exposure (kt-MW-years)")
+      h3.GetYaxis().SetTitle("#delta_{cp} resolution (degrees)")
+      h3.GetYaxis().SetTitleOffset(1.3)
+      h3.GetYaxis().CenterTitle()
+      c3.Modified()
+      graph_diff_dcpres0.SetFillColor(ROOT.kCyan+3)
+      graph_diff_dcpres0.SetLineColor(0)
+      graph_diff_dcpresneg.SetFillColor(ROOT.kPink-3)
+      graph_diff_dcpresneg.SetLineColor(0)
+      graph_diff_dcpres0.Draw("F same")
+      graph_dcpres0_noconstr.Draw("L same")
+      graph_dcpres0_th13.Draw("L same")
+      graph_diff_dcpresneg.Draw("F same")
+      graph_dcpresneg_noconstr.Draw("L same")
+      graph_dcpresneg_th13.Draw("L same")
+
+      t2 = ROOT.TPaveText(0.16,0.7,0.6,0.89,"NDC")
+      t2.AddText("DUNE Sensitivity")
+      t2.AddText("All Systematics")
+      t2.AddText(htext)
+      t2.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t2.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+      t2.SetFillStyle(0)
+      t2.SetBorderSize(0)
+      t2.SetTextAlign(12)
+
+      t2.Draw("same")
+
+      lm1 = ROOT.TLegend(0.55,0.75,0.89,0.89)
+      lm1.AddEntry(graph_diff_dcpresneg, "#delta_{CP} = -#pi/2","F")
+      lm1.AddEntry(graph_diff_dcpres0, "#delta_{CP} = 0","F")
+      lm1.AddEntry(graph_dcpres0_th13,"Nominal Analysis","L")
+      lm1.AddEntry(graph_dcpres0_noconstr,"#theta_{13} unconstrained","L")      
+      lm1.SetBorderSize(0)
+      lm1.SetFillStyle(0)
+      lm1.Draw("same")
+
+      outname = "plot/res/dcpres_exp_varyconstr_"+hier+"_2019.eps"
+      outname2 = "plot/res/dcpres_exp_varyconstr_"+hier+"_2019.png"
+      c3.SaveAs(outname)
+      c3.SaveAs(outname2)
+
+
+      c4 = ROOT.TCanvas("c4","c4",800,800)
+      c4.SetLeftMargin(0.15)
+      h4 = c4.DrawFrame(0,0.0,1500.,0.02)
+      h4.SetTitle("")
+      h4.GetXaxis().SetTitle("Exposure (kt-MW-years)")
+      h4.GetYaxis().SetTitle("sin^{2}(2#theta_{23}) Resolution")
+      h4.GetYaxis().SetTitleOffset(1.7)
+      h4.GetYaxis().CenterTitle()
+      c4.Modified()
+      graph_diff_th23res.SetFillColor(ROOT.kCyan+3)
+      graph_diff_th23res.SetLineColor(0)
+      graph_diff_th23res.Draw("F same")
+      graph_th23res_noconstr.Draw("L same")
+      graph_th23res_th13.Draw("L same")
+
+      t2.Draw("same")
+
+      lm1 = ROOT.TLegend(0.55,0.78,0.89,0.89)
+      lm1.AddEntry(graph_th23res_th13,"Nominal Analysis","L")
+      lm1.AddEntry(graph_th23res_noconstr,"#theta_{13} unconstrained","L")      
+      lm1.SetBorderSize(0)
+      lm1.SetFillStyle(0)
+      lm1.Draw("same")
+
+      outname = "plot/res/th23res_exp_varyconstr_"+hier+"_2019.eps"
+      outname2 = "plot/res/th23res_exp_varyconstr_"+hier+"_2019.png"
+      c4.SaveAs(outname)
+      c4.SaveAs(outname2)
+
+      c5 = ROOT.TCanvas("c5","c5",800,800)
+      c5.SetLeftMargin(0.15)
+      h5 = c5.DrawFrame(0,0.0,1500.,0.05)
+      h5.SetTitle("")
+      h5.GetXaxis().SetTitle("Exposure (kt-MW-years)")
+      h5.GetYaxis().SetTitle("#Deltam^{2}_{32} Resolution (eV^{2} x 10^{-3})")
+      h5.GetYaxis().SetTitleOffset(1.8)
+      h5.GetYaxis().CenterTitle()
+      c5.Modified()
+      graph_diff_dmsqres.SetFillColor(ROOT.kCyan+3)
+      graph_diff_dmsqres.SetLineColor(0)
+      #graph_diff_dmsqres.Draw("F same")
+      #graph_dmsqres_noconstr.Draw("L same")
+      graph_dmsqres_noconstr.SetLineWidth(4)
+      graph_dmsqres_noconstr.SetLineColor(ROOT.kCyan+3)
+      graph_dmsqres_noconstr.Draw("L same")
+
+      t3 = ROOT.TPaveText(0.16,0.7,0.6,0.89,"NDC")
+      t3.AddText("DUNE Sensitivity")
+      t3.AddText("All Systematics")
+      t3.AddText(htext)
+      t3.AddText("sin^{2}2#theta_{13} = 0.088 unconstrained")
+      t3.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+      t3.SetFillStyle(0)
+      t3.SetBorderSize(0)
+      t3.SetTextAlign(12)
+      
+
+      t3.Draw("same")
+      
+      null = ROOT.TObject()
+      lm1 = ROOT.TLegend(0.55,0.85,0.89,0.89)
+      lm1.AddEntry(graph_dmsqres_noconstr,"#theta_{13} unconstrained","L")
+      lm1.SetBorderSize(0)
+      lm1.SetFillStyle(0)
+      lm1.Draw("same")
+
+      outname = "plot/res/dmsqres_exp_varyconstr_"+hier+"_2019.eps"
+      outname2 = "plot/res/dmsqres_exp_varyconstr_"+hier+"_2019.png"
+      c5.SaveAs(outname)
+      c5.SaveAs(outname2)
+
+      c6 = ROOT.TCanvas("c6","c6",800,800)
+      c6.SetLeftMargin(0.15)
+      h6 = c6.DrawFrame(0,0.0,1500.,0.03)
+      h6.SetTitle("")
+      h6.GetXaxis().SetTitle("Exposure (kt-MW-years)")
+      h6.GetYaxis().SetTitle("sin^{2}(2#theta_{13}) Resolution")
+      h6.GetYaxis().SetTitleOffset(1.8)
+      h6.GetYaxis().CenterTitle()
+      c6.Modified()
+      graph_th13res_noconstr.SetLineWidth(4)
+      graph_th13res_noconstr.SetLineColor(ROOT.kCyan+3)
+      graph_th13res_noconstr.Draw("L same")
+
+      t3.Draw("same")
+
+      lm1 = ROOT.TLegend(0.55,0.85,0.89,0.89)
+      lm1.AddEntry(graph_th13res_noconstr,"#theta_{13} unconstrained","L")
+      lm1.SetBorderSize(0)
+      lm1.SetFillStyle(0)
+      lm1.Draw("same")
+
+      outname = "plot/res/th13res_exp_varyconstr_"+hier+"_2019.eps"
+      outname2 = "plot/res/th13res_exp_varyconstr_"+hier+"_2019.png"
+      c6.SaveAs(outname)
+      c6.SaveAs(outname2)
+      
 

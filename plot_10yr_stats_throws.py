@@ -31,57 +31,60 @@ else:
       print "Must supply nh or ih!"
       exit()
 
-f1text = "root_callum/cpv_throw_ndfd7year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
+f1text = "root_callum/cpv_throw_ndfd7year_allsyst_th13_"+hiestr+"_stat:start_v3_BAND.root"
 f1 = ROOT.TFile(f1text)
 band1 = f1.Get("throws_1sigma")
+band1a = f1.Get("throws_2sigma")
 cpv1 = f1.Get("throws_median")
+f1a = ROOT.TFile("root_callum/cpv_sens_ndfd_336kTMWyr_allsyst_th13_hie1_v3.root")
+a1 = f1a.Get("sens_cpv_"+hier)
 
-
-f2text = "root_callum/cpv_throw_ndfd10year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
+f2text = "root_callum/cpv_throw_ndfd10year_allsyst_th13_"+hiestr+"_stat:start_v3_BAND.root"
 f2 = ROOT.TFile(f2text)
 band2 = f2.Get("throws_1sigma")
+band2a = f2.Get("throws_2sigma")
 cpv2 = f2.Get("throws_median")
+f2a = ROOT.TFile("root_callum/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root")
+a2 = f2a.Get("sens_cpv_"+hier)
 
-#MH is FD only for now!!!
-
-f3text = "root_callum/mh_throw_ndfd7year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
+f3text = "root_callum/mh_throw_ndfd7year_allsyst_th13_"+hiestr+"_stat:start_v3_BAND.root"
 f3 = ROOT.TFile(f3text)
 band3 = f3.Get("throws_1sigma")
+band3a = f3.Get("throws_2sigma")
 cpv3 = f3.Get("throws_median")
+f3a = ROOT.TFile("root_callum/mh_sens_ndfd_336kTMWyr_allsyst_th13_hie1_v3.root")
+a3 = f3a.Get("sens_mh_"+hier)
 
-
-f4text = "root_callum/mh_throw_ndfd10year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
+f4text = "root_callum/mh_throw_ndfd10year_allsyst_th13_"+hiestr+"_stat:start_v3_BAND.root"
 f4 = ROOT.TFile(f4text)
 band4 = f4.Get("throws_1sigma")
+band4a = f4.Get("throws_2sigma")
 cpv4 = f4.Get("throws_median")
+f4a = ROOT.TFile("root_callum/mh_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root")
+a4 = f4a.Get("sens_mh_"+hier)
 
-cpv1.SetLineWidth(4)
-cpv1.SetLineColor(ROOT.kBlue-7)
-cpv2.SetLineWidth(4)
-cpv2.SetLineColor(ROOT.kOrange-3)
+a2.SetLineWidth(4)
+a2.SetLineColor(ROOT.kBlue)
 
-band1.SetFillStyle(1001)
 band2.SetFillStyle(1001)
+band2a.SetFillStyle(1001)
+band2.SetFillColor(ROOT.kGreen)
+band2a.SetFillColor(ROOT.kYellow)
 
-band1.SetFillColorAlpha(ROOT.kBlue-7,0.5)
-band2.SetFillColorAlpha(ROOT.kOrange-3,0.5)
-
-band1.SetLineColor(0)
 band2.SetLineColor(0)
+band2a.SetLineColor(0)
 
-cpv3.SetLineWidth(4)
-cpv3.SetLineColor(ROOT.kBlue-7)
-cpv4.SetLineWidth(4)
-cpv4.SetLineColor(ROOT.kOrange-3)
+a4.SetLineWidth(4)
+a4.SetLineColor(ROOT.kBlue)
 
-band3.SetFillStyle(1001)
 band4.SetFillStyle(1001)
+band4a.SetFillStyle(1001)
 
-band3.SetFillColorAlpha(ROOT.kBlue-7,0.5)
-band4.SetFillColorAlpha(ROOT.kOrange-3,0.5)
+band4.SetFillColor(ROOT.kGreen)
+band4a.SetFillColor(ROOT.kYellow)
 
-band3.SetLineColor(0)
 band4.SetLineColor(0)
+band4a.SetLineColor(0)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
@@ -93,36 +96,30 @@ h1.GetYaxis().SetTitle("#sigma = #sqrt{#bar{#Delta#chi^{2}}}")
 h1.GetYaxis().SetTitleOffset(1.3)
 h1.GetYaxis().CenterTitle()
 c1.Modified()
+band2a.Draw("e3 same")
 band2.Draw("e3 same")
-band1.Draw("e3 same")
-cpv1.Draw("same")
-cpv2.Draw("same")
+a2.Draw("same")
 ROOT.gPad.RedrawAxis()
 
 t1 = ROOT.TPaveText(0.16,0.7,0.5,0.89,"NDC")
 t1.AddText("DUNE Sensitivity")
 t1.AddText("All Systematics")
 t1.AddText(htext)
-t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
-t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+if (hier == 'nh'):
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("sin^{2}#theta_{23} = 0.580 unconstrained")
+elif (hier == 'ih'):
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("sin^{2}#theta_{23} = 0.583 unconstrained")
 t1.SetFillStyle(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)
 t1.Draw("same")
 
-band_dum = band2.Clone()
-band_dum.SetFillColorAlpha(ROOT.kBlack,0.25)
-cpv_dum = cpv1.Clone()
-cpv_dum.SetLineColor(ROOT.kBlack)
-null = ROOT.TObject()
-
 l1 = ROOT.TLegend(0.52,0.68,0.89,0.89)
-l1.AddEntry(cpv1,"7 years (staged)", "L")
-l1.AddEntry(cpv2,"10 years (staged)", "L")
-l1.AddEntry(cpv_dum,"Median of Throws","L")
-l1.AddEntry(band_dum, "1#sigma: Variations of","F")
-l1.AddEntry(null,"statistics, systematics,","")
-l1.AddEntry(null,"and oscillation parameters","")
+l1.AddEntry(a2,"10 years (staged, Asimov)", "L")
+l1.AddEntry(band2, "1#sigma stat. variations","F")
+l1.AddEntry(band2a, "2#sigma stat. variations","F")
 l1.SetBorderSize(0)
 l1.SetFillStyle(0)
 
@@ -150,7 +147,7 @@ t5sig.SetBorderSize(0)
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/cpv/cpv_two_exps_throws_"+hier+"_2019.png"
+outname = "plot/cpv/cpv_10yr_throws_"+hier+"_stats_2019.png"
 c1.SaveAs(outname)
 
 c2 = ROOT.TCanvas("c2","c2",800,800)
@@ -163,18 +160,21 @@ h2.GetYaxis().SetTitle("#sqrt{#bar{#Delta#chi^{2}}}")
 h2.GetYaxis().SetTitleOffset(1.3)
 h2.GetYaxis().CenterTitle()
 c2.Modified()
+band4a.Draw("e3 same")
 band4.Draw("e3 same")
-band3.Draw("e3 same")
-cpv3.Draw("same")
-cpv4.Draw("same")
+a4.Draw("same")
 ROOT.gPad.RedrawAxis()
 
 t1 = ROOT.TPaveText(0.16,0.7,0.5,0.89,"NDC")
 t1.AddText("DUNE Sensitivity")
 t1.AddText("All Systematics")
 t1.AddText(htext)
-t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
-t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+if (hier == 'nh'):
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("sin^{2}#theta_{23} = 0.580 unconstrained")
+elif (hier == 'ih'):
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("sin^{2}#theta_{23} = 0.583 unconstrained")
 t1.SetFillStyle(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)
@@ -187,7 +187,7 @@ line2.Draw("same")
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/mh/mh_two_exps_throws_"+hier+"_2019.png"
+outname = "plot/mh/mh_10yr_throws_"+hier+"_stats_2019.png"
 c2.SaveAs(outname)
 
 

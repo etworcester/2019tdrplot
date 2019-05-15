@@ -35,30 +35,44 @@ f1text = "root_callum/cpv_throw_ndfd7year_allsyst_th13_"+hiestr+"_stat:fake:star
 f1 = ROOT.TFile(f1text)
 band1 = f1.Get("throws_1sigma")
 cpv1 = f1.Get("throws_median")
+f1a = ROOT.TFile("root_callum/cpv_sens_ndfd_336kTMWyr_allsyst_th13_hie1_v3.root")
+a1 = f1a.Get("sens_cpv_"+hier)
 
 
 f2text = "root_callum/cpv_throw_ndfd10year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
 f2 = ROOT.TFile(f2text)
 band2 = f2.Get("throws_1sigma")
 cpv2 = f2.Get("throws_median")
+f2a = ROOT.TFile("root_callum/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root")
+a2 = f2a.Get("sens_cpv_"+hier)
 
-#MH is FD only for now!!!
 
 f3text = "root_callum/mh_throw_ndfd7year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
 f3 = ROOT.TFile(f3text)
 band3 = f3.Get("throws_1sigma")
 cpv3 = f3.Get("throws_median")
+f3a = ROOT.TFile("root_callum/mh_sens_ndfd_336kTMWyr_allsyst_th13_hie1_v3.root")
+a3 = f3a.Get("sens_mh_"+hier)
 
 
 f4text = "root_callum/mh_throw_ndfd10year_allsyst_th13_"+hiestr+"_stat:fake:start_v3_BAND.root"
 f4 = ROOT.TFile(f4text)
 band4 = f4.Get("throws_1sigma")
 cpv4 = f4.Get("throws_median")
+f4a = ROOT.TFile("root_callum/mh_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root")
+a4 = f4a.Get("sens_mh_"+hier)
 
 cpv1.SetLineWidth(4)
 cpv1.SetLineColor(ROOT.kBlue-7)
 cpv2.SetLineWidth(4)
 cpv2.SetLineColor(ROOT.kOrange-3)
+
+a1.SetLineWidth(4)
+a1.SetLineStyle(2)
+a1.SetLineColor(ROOT.kBlue-7)
+a2.SetLineWidth(4)
+a2.SetLineStyle(2)
+a2.SetLineColor(ROOT.kOrange-7)
 
 band1.SetFillStyle(1001)
 band2.SetFillStyle(1001)
@@ -73,6 +87,13 @@ cpv3.SetLineWidth(4)
 cpv3.SetLineColor(ROOT.kBlue-7)
 cpv4.SetLineWidth(4)
 cpv4.SetLineColor(ROOT.kOrange-3)
+
+a3.SetLineWidth(4)
+a3.SetLineStyle(2)
+a3.SetLineColor(ROOT.kBlue-7)
+a4.SetLineWidth(4)
+a4.SetLineStyle(2)
+a4.SetLineColor(ROOT.kOrange-7)
 
 band3.SetFillStyle(1001)
 band4.SetFillStyle(1001)
@@ -97,6 +118,8 @@ band2.Draw("e3 same")
 band1.Draw("e3 same")
 cpv1.Draw("same")
 cpv2.Draw("same")
+a1.Draw("same")
+a2.Draw("same")
 ROOT.gPad.RedrawAxis()
 
 t1 = ROOT.TPaveText(0.16,0.7,0.5,0.89,"NDC")
@@ -104,7 +127,7 @@ t1.AddText("DUNE Sensitivity")
 t1.AddText("All Systematics")
 t1.AddText(htext)
 t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
-t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+t1.AddText("sin^{2}#theta_{23}: uniform NuFit 4.0")
 t1.SetFillStyle(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)
@@ -114,13 +137,16 @@ band_dum = band2.Clone()
 band_dum.SetFillColorAlpha(ROOT.kBlack,0.25)
 cpv_dum = cpv1.Clone()
 cpv_dum.SetLineColor(ROOT.kBlack)
+a_dum = a1.Clone()
+a_dum.SetLineColor(ROOT.kBlack)
 null = ROOT.TObject()
 
 l1 = ROOT.TLegend(0.52,0.68,0.89,0.89)
 l1.AddEntry(cpv1,"7 years (staged)", "L")
 l1.AddEntry(cpv2,"10 years (staged)", "L")
 l1.AddEntry(cpv_dum,"Median of Throws","L")
-l1.AddEntry(band_dum, "1#sigma: Variations of","F")
+l1.AddEntry(a_dum,"Asimov Set","L")
+l1.AddEntry(band_dum, "1#sigma variations of","F")
 l1.AddEntry(null,"statistics, systematics,","")
 l1.AddEntry(null,"and oscillation parameters","")
 l1.SetBorderSize(0)
@@ -150,7 +176,7 @@ t5sig.SetBorderSize(0)
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/cpv/cpv_two_exps_throws_"+hier+"_2019.png"
+outname = "plot/cpv/cpv_two_exps_throws_"+hier+"_compareasimov_2019.png"
 c1.SaveAs(outname)
 
 c2 = ROOT.TCanvas("c2","c2",800,800)
@@ -167,6 +193,8 @@ band4.Draw("e3 same")
 band3.Draw("e3 same")
 cpv3.Draw("same")
 cpv4.Draw("same")
+a3.Draw("same")
+a4.Draw("same")
 ROOT.gPad.RedrawAxis()
 
 t1 = ROOT.TPaveText(0.16,0.7,0.5,0.89,"NDC")
@@ -174,7 +202,7 @@ t1.AddText("DUNE Sensitivity")
 t1.AddText("All Systematics")
 t1.AddText(htext)
 t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
-t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+t1.AddText("sin^{2}#theta_{23}: uniform NuFit 4.0")
 t1.SetFillStyle(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)
@@ -187,7 +215,7 @@ line2.Draw("same")
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/mh/mh_two_exps_throws_"+hier+"_2019.png"
+outname = "plot/mh/mh_two_exps_throws_"+hier+"_compareasimov_2019.png"
 c2.SaveAs(outname)
 
 

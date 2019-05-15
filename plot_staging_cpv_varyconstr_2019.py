@@ -74,19 +74,53 @@ g_mhsig_best_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhs
 g_mhsig_100_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsig100_th13pen")
 g_mhsig_best_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsigbest_th13pen")
 
+g_dcpres0_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpres0_th13pen")
+g_dcpresneg_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpresneg_th13pen")
+g_th23res_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th23res_th13pen")
+g_dmsqres_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dmsqres_th13pen")
+
+g_dcpres0_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpres0_nopen")
+g_dcpresneg_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpresneg_nopen")
+g_th23res_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th23res_nopen")
+g_dmsqres_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dmsqres_nopen")
+g_th13res_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th13res_nopen")
+
+g_dcpres0_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpres0_th13pen")
+g_dcpresneg_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpresneg_th13pen")
+g_th23res_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th23res_th13pen")
+g_dmsqres_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dmsqres_th13pen")
+
+g_dcpres0_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpres0_nopen")
+g_dcpresneg_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpresneg_nopen")
+g_th23res_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th23res_nopen")
+g_dmsqres_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dmsqres_nopen")
+g_th13res_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th13res_nopen")
+
 
 explist = [0,1,5,10,30,50,100,200,336,450,624,800,1104,1300,1500]
-cpv75_lo = [0]
-cpv50_lo = [0]
-cpvbest_lo = [0]
-cpv75_hi = [0]
-cpv50_hi = [0]
-cpvbest_hi = [0]
+cpv75_lo = []
+cpv50_lo = []
+cpvbest_lo = []
+cpv75_hi = []
+cpv50_hi = []
+cpvbest_hi = []
 
-mh100_lo = [0]
-mhbest_lo = [0]
-mh100_hi = [0]
-mhbest_hi = [0]
+mh100_lo = []
+mhbest_lo = []
+mh100_hi = []
+mhbest_hi = []
+
+dcpres0_lo = [1000]
+dcpresneg_lo = [1000]
+th23res_lo = [0.05]
+dmsqres_lo = [0.3]
+th13res_lo = [0.1]
+
+dcpres0_hi = [1000]
+dcpresneg_hi = [1000]
+th23res_hi = [0.05]
+dmsqres_hi = [0.3]
+
 
 def fillstaged(thisexp,syst=""):
       thing = globals()["g_cpvsig_75_lo_"+syst]
@@ -111,37 +145,70 @@ def fillstaged(thisexp,syst=""):
       thing = globals()["g_mhsig_best_hi_"+syst]
       mhbest_hi.append(thing.Eval(thisexp,0,"S"))
 
+      thing = globals()["g_dcpres0_lo_"+syst]
+      dcpres0_lo.append(thing.Eval(thisexp,0,""))
+      thing = globals()["g_dcpresneg_lo_"+syst]
+      dcpresneg_lo.append(thing.Eval(thisexp,0,""))
+
+      thing = globals()["g_th23res_lo_"+syst]
+      th23res_lo.append(thing.Eval(thisexp,0,""))
+      thing = globals()["g_th13res_lo_"+syst]
+      th13res_lo.append(thing.Eval(thisexp,0,""))
+      thing = globals()["g_dmsqres_lo_"+syst]
+      dmsqres_lo.append(thing.Eval(thisexp,0,""))
+
+      thing = globals()["g_dcpres0_hi_"+syst]
+      dcpres0_hi.append(thing.Eval(thisexp,0,""))
+      thing = globals()["g_dcpresneg_hi_"+syst]
+      dcpresneg_hi.append(thing.Eval(thisexp,0,""))
+
+      thing = globals()["g_th23res_hi_"+syst]
+      th23res_hi.append(thing.Eval(thisexp,0,""))
+      thing = globals()["g_dmsqres_hi_"+syst]
+      dmsqres_hi.append(thing.Eval(thisexp,0,""))
+      
+
       return 0
 
 
 g_staging = ROOT.TGraph()
-g_staging.SetPoint(0, 0.0, 0.0)
 
-years = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0,
-         6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0]
+#years = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0,
+#         6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0]
+#years = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.25, 4.5, 4.75, 5.0, 5.25, 5.5, 5.75,
+#         6.0, 6.25, 6.5, 6.75, 7.0, 7.5, 8.0, 9.0, 10., 11.0, 12.0, 13.0, 14.0, 15.0]
+
+years = []
+
 thisexp = 0
 count = 0
-for year in years:
+year = 0
+#for year in years:
+while year < 15.01:
+      years.append(year)
       thissyst = "full"
       if year < 3.5:
             thissyst = "prelim"
 
       power = 2.4
-      if year < 7:
+      if year < 6.01:
             power = 1.2
 
       mass = 40
-      if year < 3.5:
+      if year < 3.01:
             mass = 30
-      if year < 1.25:
+      if year < 1.01:
             mass = 20
 
       if count > 0:
             thisexp += mass*power*(year - years[count-1])
-            print "Year ", year, ": ", thisexp
-            fillstaged(thisexp,thissyst)
-            g_staging.SetPoint(g_staging.GetN(), thisexp, years[g_staging.GetN()])
+
+      print "Year ", year, ": ", thisexp
+      fillstaged(thisexp,thissyst)
+      g_staging.SetPoint(g_staging.GetN(), thisexp, years[g_staging.GetN()])
+
       count +=1
+      year += 0.25
 
 f_out = ROOT.TFile("root/staging_convert.root","RECREATE")
 g_staging.SetName("g_exp")
@@ -162,6 +229,17 @@ mhbest_lo = array('d',mhbest_lo)
 mh100_hi = array('d',mh100_hi)
 mhbest_hi = array('d',mhbest_hi)
 
+dcpres0_lo = array('d',dcpres0_lo)
+dcpresneg_lo = array('d',dcpresneg_lo)
+th23res_lo = array('d',th23res_lo)
+th13res_lo = array('d',th13res_lo)
+dmsqres_lo = array('d',dmsqres_lo)
+
+dcpres0_hi = array('d',dcpres0_hi)
+dcpresneg_hi = array('d',dcpresneg_hi)
+th23res_hi = array('d',th23res_hi)
+dmsqres_hi = array('d',dmsqres_hi)
+
 g_staged_cpv75_lo = ROOT.TGraph(nyears,years,cpv75_lo)
 g_staged_cpv50_lo = ROOT.TGraph(nyears,years,cpv50_lo)
 g_staged_cpvbest_lo = ROOT.TGraph(nyears,years,cpvbest_lo)
@@ -174,11 +252,27 @@ g_staged_mhbest_lo = ROOT.TGraph(nyears,years,mhbest_lo)
 g_staged_mh100_hi = ROOT.TGraph(nyears,years,mh100_hi)
 g_staged_mhbest_hi = ROOT.TGraph(nyears,years,mhbest_hi)
 
+g_staged_dcpres0_lo = ROOT.TGraph(nyears,years,dcpres0_lo)
+g_staged_dcpresneg_lo = ROOT.TGraph(nyears,years,dcpresneg_lo)
+g_staged_th23res_lo = ROOT.TGraph(nyears,years,th23res_lo)
+g_staged_th13res_lo = ROOT.TGraph(nyears,years,th13res_lo)
+g_staged_dmsqres_lo = ROOT.TGraph(nyears,years,dmsqres_lo)
+
+g_staged_dcpres0_hi = ROOT.TGraph(nyears,years,dcpres0_hi)
+g_staged_dcpresneg_hi = ROOT.TGraph(nyears,years,dcpresneg_hi)
+g_staged_th23res_hi = ROOT.TGraph(nyears,years,th23res_hi)
+g_staged_dmsqres_hi = ROOT.TGraph(nyears,years,dmsqres_hi)
+
 gdiff_staged_cpv75 = filldiff(g_staged_cpv75_hi,g_staged_cpv75_lo)
 gdiff_staged_cpv50 = filldiff(g_staged_cpv50_hi,g_staged_cpv50_lo)
 gdiff_staged_cpvbest = filldiff(g_staged_cpvbest_hi,g_staged_cpvbest_lo)
 gdiff_staged_mh100 = filldiff(g_staged_mh100_hi,g_staged_mh100_lo)
 gdiff_staged_mhbest = filldiff(g_staged_mhbest_hi,g_staged_mhbest_lo)
+
+gdiff_staged_dcpres0 = filldiff(g_staged_dcpres0_hi,g_staged_dcpres0_lo)
+gdiff_staged_dcpresneg = filldiff(g_staged_dcpresneg_hi,g_staged_dcpresneg_lo)
+gdiff_staged_th23res = filldiff(g_staged_th23res_hi,g_staged_th23res_lo)
+gdiff_staged_dmsqres = filldiff(g_staged_dmsqres_hi,g_staged_dmsqres_lo)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
@@ -327,9 +421,181 @@ l1.AddEntry(g_staged_mh100_lo,"#theta_{13} unconstrained","L")
 l1.SetBorderSize(0)
 l1.Draw("same")
 
+line3 = ROOT.TLine(0.0,5.,7.,5.)
+line3.SetLineStyle(2)
+line3.SetLineWidth(3)
+line3.Draw("same")
+
 outname = "plot/exposures/mh_exp_staging_varyconstr_"+hier+"_2019.eps"
 outname2 = "plot/exposures/mh_exp_staging_varyconstr_"+hier+"_2019.png"
 c2.SaveAs(outname)
 c2.SaveAs(outname2)                               
 
+if (hier == "nh"):
+      c3 = ROOT.TCanvas("c3","c3",800,800)
+      c3.SetLeftMargin(0.15)
+      h3 = c3.DrawFrame(0,0.0,15.0,60.0)
+      h3.SetTitle("")
+      h3.GetXaxis().SetTitle("Years")
+      h3.GetYaxis().SetTitle("#delta_{CP} Resolution (degrees)")      
+      h3.GetYaxis().SetTitleOffset(1.5)
+      h3.GetYaxis().CenterTitle()
+      c3.Modified()
+
+      gdiff_staged_dcpres0.SetFillColor(ROOT.kCyan+3)
+      gdiff_staged_dcpres0.SetLineColor(0)
+      g_staged_dcpres0_lo.SetLineWidth(3)
+      g_staged_dcpres0_hi.SetLineWidth(3)
+      g_staged_dcpres0_lo.SetLineStyle(3)
+
+      gdiff_staged_dcpres0.Draw("F same")
+      g_staged_dcpres0_lo.Draw("same")
+      g_staged_dcpres0_hi.Draw("same")
+
+      gdiff_staged_dcpresneg.SetFillColor(ROOT.kPink-3)
+      gdiff_staged_dcpresneg.SetLineColor(0)
+      g_staged_dcpresneg_lo.SetLineWidth(3)
+      g_staged_dcpresneg_hi.SetLineWidth(3)
+      g_staged_dcpresneg_lo.SetLineStyle(3)
+
+      gdiff_staged_dcpresneg.Draw("F same")
+      g_staged_dcpresneg_lo.Draw("same")
+      g_staged_dcpresneg_hi.Draw("same")
+
+      t1 = ROOT.TPaveText(0.5,0.72,0.89,0.89,"NDC")
+      t1.AddText("DUNE Sensitivity (Staged)")
+      t1.AddText("All Systematics")
+      t1.AddText(htext)
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+      t1.SetBorderSize(0)
+      t1.SetFillStyle(0)
+      t1.SetTextAlign(12)
+      t1.Draw("same")
+
+      l1 = ROOT.TLegend(0.5,0.58,0.89,0.7)
+      l1.AddEntry(gdiff_staged_dcpresneg, "#delta_{CP} = -#pi/2","F")
+      l1.AddEntry(gdiff_staged_dcpres0, "#delta_{CP} = 0","F")
+      l1.AddEntry(g_staged_dcpres0_hi,"Nominal Analysis","L")
+      l1.AddEntry(g_staged_dcpresneg_lo,"#theta_{13} unconstrained","L")
+      l1.SetBorderSize(0)
+      l1.Draw("same")
+      
+      outname = "plot/res/dcp_exp_staging_varyconstr_"+hier+"_2019.eps"
+      outname2 = "plot/res/dcp_exp_staging_varyconstr_"+hier+"_2019.png"
+      c3.SaveAs(outname)
+      c3.SaveAs(outname2)                               
+
+      c4 = ROOT.TCanvas("c4","c4",800,800)
+      c4.SetLeftMargin(0.15)
+      h4 = c4.DrawFrame(0,0.0,15.0,0.02)
+      h4.SetTitle("")
+      h4.GetXaxis().SetTitle("Years")
+      h4.GetYaxis().SetTitle("sin^{2}(2#theta_{23}) Resolution")      
+      h4.GetYaxis().SetTitleOffset(1.7)
+      h4.GetYaxis().CenterTitle()
+      c4.Modified()
+
+      gdiff_staged_th23res.SetFillColor(ROOT.kCyan+3)
+      gdiff_staged_th23res.SetLineColor(0)
+      g_staged_th23res_lo.SetLineWidth(3)
+      g_staged_th23res_hi.SetLineWidth(3)
+      g_staged_th23res_lo.SetLineStyle(3)
+
+      gdiff_staged_th23res.Draw("F same")
+      g_staged_th23res_lo.Draw("same")
+      g_staged_th23res_hi.Draw("same")
+
+      t1 = ROOT.TPaveText(0.5,0.72,0.89,0.89,"NDC")
+      t1.AddText("DUNE Sensitivity (Staged)")
+      t1.AddText("All Systematics")
+      t1.AddText(htext)
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+      t1.SetBorderSize(0)
+      t1.SetFillStyle(0)
+      t1.SetTextAlign(12)
+      t1.Draw("same")
+
+      l1 = ROOT.TLegend(0.5,0.6,0.89,0.7)
+      l1.AddEntry(g_staged_th23res_hi,"Nominal Analysis","L")
+      l1.AddEntry(g_staged_th23res_lo,"#theta_{13} unconstrained","L")
+      l1.SetBorderSize(0)
+      l1.Draw("same")
+      
+      outname = "plot/res/th23_exp_staging_varyconstr_"+hier+"_2019.eps"
+      outname2 = "plot/res/th23_exp_staging_varyconstr_"+hier+"_2019.png"
+      c4.SaveAs(outname)
+      c4.SaveAs(outname2)                               
+
+      c5 = ROOT.TCanvas("c5","c5",800,800)
+      c5.SetLeftMargin(0.15)
+      h5 = c5.DrawFrame(0,0.0,15.0,0.05)
+      h5.SetTitle("")
+      h5.GetXaxis().SetTitle("Years")
+      h5.GetYaxis().SetTitle("#Deltam^{2}_{32} Resolution (eV^{2} x 10^{-3})")
+      h5.GetYaxis().SetTitleOffset(1.7)
+      h5.GetYaxis().CenterTitle()
+      c5.Modified()
+
+      gdiff_staged_dmsqres.SetFillColor(ROOT.kCyan+3)
+      gdiff_staged_dmsqres.SetLineColor(0)
+      g_staged_dmsqres_lo.SetLineWidth(3)
+      g_staged_dmsqres_hi.SetLineWidth(3)
+      g_staged_dmsqres_lo.SetLineStyle(3)
+
+      g_staged_dmsqres_lo.Draw("same")
+
+      t1 = ROOT.TPaveText(0.5,0.72,0.89,0.89,"NDC")
+      t1.AddText("DUNE Sensitivity (Staged)")
+      t1.AddText("All Systematics")
+      t1.AddText(htext)
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+      t1.SetBorderSize(0)
+      t1.SetFillStyle(0)
+      t1.SetTextAlign(12)
+      t1.Draw("same")
+
+      l1 = ROOT.TLegend(0.5,0.6,0.89,0.7)
+      l1.AddEntry(g_staged_dmsqres_lo,"#theta_{13} unconstrained","L")
+      l1.SetBorderSize(0)
+      l1.Draw("same")
+      
+      outname = "plot/res/dmsq_exp_staging_varyconstr_"+hier+"_2019.eps"
+      outname2 = "plot/res/dmsq_exp_staging_varyconstr_"+hier+"_2019.png"
+      c5.SaveAs(outname)
+      c5.SaveAs(outname2)                               
+
+      c6 = ROOT.TCanvas("c6","c6",800,800)
+      c6.SetLeftMargin(0.15)
+      h6 = c6.DrawFrame(0,0.0,15.0,0.03)
+      h6.SetTitle("")
+      h6.GetXaxis().SetTitle("Years")
+      h6.GetYaxis().SetTitle("sin^{2}(2#theta_{13}) Resolution")
+      h6.GetYaxis().SetTitleOffset(1.7)
+      h6.GetYaxis().CenterTitle()
+      c6.Modified()
+
+      g_staged_th13res_lo.SetLineWidth(4)
+      g_staged_th13res_lo.SetLineStyle(3)
+      g_staged_th13res_lo.Draw("same")
+
+      t1 = ROOT.TPaveText(0.5,0.72,0.89,0.89,"NDC")
+      t1.AddText("DUNE Sensitivity (Staged)")
+      t1.AddText("All Systematics")
+      t1.AddText(htext)
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 unconstrained")
+      t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+      t1.SetBorderSize(0)
+      t1.SetFillStyle(0)
+      t1.SetTextAlign(12)
+      t1.Draw("same")
+      l1.Draw("same")
+
+      outname = "plot/res/th13_exp_staging_varyconstr_"+hier+"_2019.eps"
+      outname2 = "plot/res/th13_exp_staging_varyconstr_"+hier+"_2019.png"
+      c6.SaveAs(outname)
+      c6.SaveAs(outname2)                               
+      
 

@@ -55,6 +55,14 @@ f4 = ROOT.TFile(f4text)
 band4 = f4.Get("throws_1sigma")
 cpv4 = f4.Get("throws_median")
 
+f5text = "../2017_globes/root/sens_optimized_long_no_exp300.root"
+cdr_cpv_7yr = ROOT.TFile(f5text).Get("CPVSig")
+cdr_mh_7yr = ROOT.TFile(f5text).Get("MHSig")
+
+f6text = "../2017_globes/root/sens_optimized_long_no_exp556.root"
+cdr_cpv_10yr = ROOT.TFile(f6text).Get("CPVSig")
+cdr_mh_10yr = ROOT.TFile(f6text).Get("MHSig")
+
 cpv1.SetLineWidth(4)
 cpv1.SetLineColor(ROOT.kBlue-7)
 cpv2.SetLineWidth(4)
@@ -83,6 +91,21 @@ band4.SetFillColorAlpha(ROOT.kOrange-3,0.5)
 band3.SetLineColor(0)
 band4.SetLineColor(0)
 
+cdr_cpv_7yr.SetLineColor(ROOT.kBlue-7)
+cdr_mh_7yr.SetLineColor(ROOT.kBlue-7)
+cdr_cpv_10yr.SetLineColor(ROOT.kOrange-3)
+cdr_mh_10yr.SetLineColor(ROOT.kOrange-7)
+
+cdr_cpv_7yr.SetLineWidth(4)
+cdr_cpv_10yr.SetLineWidth(4)
+cdr_mh_7yr.SetLineWidth(4)
+cdr_mh_10yr.SetLineWidth(4)
+
+cdr_cpv_7yr.SetLineStyle(2)
+cdr_cpv_10yr.SetLineStyle(2)
+cdr_mh_7yr.SetLineStyle(2)
+cdr_mh_10yr.SetLineStyle(2)
+
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
 h1 = c1.DrawFrame(-1.0,0.0,1.0,11.5)
@@ -97,6 +120,8 @@ band2.Draw("e3 same")
 band1.Draw("e3 same")
 cpv1.Draw("same")
 cpv2.Draw("same")
+cdr_cpv_7yr.Draw("same")
+cdr_cpv_10yr.Draw("same")
 ROOT.gPad.RedrawAxis()
 
 t1 = ROOT.TPaveText(0.16,0.7,0.5,0.89,"NDC")
@@ -114,6 +139,8 @@ band_dum = band2.Clone()
 band_dum.SetFillColorAlpha(ROOT.kBlack,0.25)
 cpv_dum = cpv1.Clone()
 cpv_dum.SetLineColor(ROOT.kBlack)
+cdr_cpv_dum = cdr_cpv_7yr.Clone()
+cdr_cpv_dum.SetLineColor(ROOT.kBlack)
 null = ROOT.TObject()
 
 l1 = ROOT.TLegend(0.52,0.68,0.89,0.89)
@@ -123,6 +150,7 @@ l1.AddEntry(cpv_dum,"Median of Throws","L")
 l1.AddEntry(band_dum, "1#sigma: Variations of","F")
 l1.AddEntry(null,"statistics, systematics,","")
 l1.AddEntry(null,"and oscillation parameters","")
+l1.AddEntry(cdr_cpv_dum, "CDR Asimov Set","L")
 l1.SetBorderSize(0)
 l1.SetFillStyle(0)
 
@@ -150,7 +178,7 @@ t5sig.SetBorderSize(0)
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/cpv/cpv_two_exps_throws_"+hier+"_2019.png"
+outname = "plot/cpv/cpv_two_exps_throws_"+hier+"_comparecdr_2019.png"
 c1.SaveAs(outname)
 
 c2 = ROOT.TCanvas("c2","c2",800,800)
@@ -167,6 +195,8 @@ band4.Draw("e3 same")
 band3.Draw("e3 same")
 cpv3.Draw("same")
 cpv4.Draw("same")
+cdr_mh_7yr.Draw("same")
+cdr_mh_10yr.Draw("same")
 ROOT.gPad.RedrawAxis()
 
 t1 = ROOT.TPaveText(0.16,0.7,0.5,0.89,"NDC")
@@ -187,7 +217,7 @@ line2.Draw("same")
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/mh/mh_two_exps_throws_"+hier+"_2019.png"
+outname = "plot/mh/mh_two_exps_throws_"+hier+"_comparecdr_2019.png"
 c2.SaveAs(outname)
 
 
