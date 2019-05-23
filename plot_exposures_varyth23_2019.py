@@ -352,7 +352,7 @@ if (hier == 'nh'):
       t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
 elif (hier == 'ih'):
       t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
-t1.AddText("sin^{2}#theta_{23}: NuFit4 90% C.L.")
+t1.AddText("sin^{2}#theta_{23}: NuFIT 4.0 90% C.L.")
 t1.SetFillColor(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)

@@ -93,6 +93,7 @@ g_dmsqres_th13pen = ROOT.TGraph(ndict["dmsqres_th13pen"],adict["dmsqres_th13pen"
 #Get numbers I want
 
 cpv75_nom_3sig = g_cpvsig75_th13pen.Eval(3.0,0,"S")
+cpv50_nom_3sig = g_cpvsig50_th13pen.Eval(3.0,0,"S")
 cpv50_nom_5sig = g_cpvsig50_th13pen.Eval(5.0,0,"S")
 cpvbest_nom_5sig = g_cpvsigbest_th13pen.Eval(5.0,0,"S")
 cpvbest_nom_3sig = g_cpvsigbest_th13pen.Eval(3.0,0,"S")
@@ -108,6 +109,7 @@ th13res_nom_004 = g_th13res_nopen.Eval(0.004,0,"S")
 th13res_nom_003 = g_th13res_nopen.Eval(0.003,0,"S")
 
 print "CPV 75% (3 sigma): ", cpv75_nom_3sig, g_exp.Eval(cpv75_nom_3sig,0,"S")
+print "CPV 50% (3 sigma): ", cpv50_nom_3sig, g_exp.Eval(cpv50_nom_3sig,0,"S")
 print "CPV 50% (5 sigma): ", cpv50_nom_5sig, g_exp.Eval(cpv50_nom_5sig,0,"S")
 print "CPV -pi/2 (3 sigma): ", cpvbest_nom_3sig, g_exp.Eval(cpvbest_nom_3sig,0,"S")
 print "CPV -pi/2 (5 sigma): ", cpvbest_nom_5sig, g_exp.Eval(cpvbest_nom_5sig,0,"S")
