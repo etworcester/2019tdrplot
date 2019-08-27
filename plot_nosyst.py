@@ -31,27 +31,28 @@ else:
       print "Must supply nh or ih!"
       exit()
 
-f1 = ROOT.TFile("root_callum/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root")
+f1 = ROOT.TFile("root_v4/sens_staging/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_asimov0_v4.root")
 anom = f1.Get("sens_cpv_"+hier)
-f1a = ROOT.TFile("root_chris/cpv_res_tdr_minus1to1.root")
-idnom = f1a.Get("th13_10yr")
+
+f1a = ROOT.TFile("root_v4/throws/graphs_final.root")
+idnom = f1a.Get("dcp_th23upper_th13_10yr")
 
 r1s = ROOT.TGraphSmooth("normal")
 dnom = r1s.SmoothKern(idnom,"normal",0.25) 
 
-f2 = ROOT.TFile("root_callum/cpv_sens_fd_624kTMWyr_nosyst_th13_hie1_asimov0_v3.root")
+f2 = ROOT.TFile("root_v4/sens_staging/cpv_sens_fd_624kTMWyr_nosyst_th13_hie1_asimov0_v4.root")
 anosyst = f2.Get("sens_cpv_"+hier)
 
 
-f3 = ROOT.TFile("root_chris/nuwro_bias_fdOnly.root")
-idnosyst = f3.Get("dcp_nosyst")
+f3 = ROOT.TFile("root_v4/throws/param_res_nosyst.root")
+idnosyst = f3.Get("dcp_th23upper_th13_10yr_nosyst")
 
 r2s = ROOT.TGraphSmooth("normal")
 dnosyst = r2s.SmoothKern(idnosyst,"normal",0.25) 
 
-f4 = ROOT.TFile("root_callum/mh_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root")
+f4 = ROOT.TFile("root_v4/sens_staging/mh_sens_ndfd_624kTMWyr_allsyst_th13_hie1_asimov0_v4.root")
 mhnom = f4.Get("sens_mh_"+hier)
-f5 = ROOT.TFile("root_callum/mh_sens_fd_624kTMWyr_nosyst_th13_hie1_asimov0_v3.root")
+f5 = ROOT.TFile("root_v4/sens_staging/mh_sens_fd_624kTMWyr_nosyst_th13_hie1_asimov0_v4.root")
 mhnosyst = f5.Get("sens_mh_"+hier)
 
 
@@ -74,7 +75,7 @@ mhnosyst.SetLineStyle(2)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
-h1 = c1.DrawFrame(-1.0,0.0,1.0,9.5)
+h1 = c1.DrawFrame(-1.0,0.0,1.0,10.0)
 h1.SetTitle("CP Violation Sensitivity")
 h1.GetXaxis().SetTitle("#delta_{CP}/#pi")
 h1.GetXaxis().CenterTitle()
@@ -132,8 +133,10 @@ t5sig.SetBorderSize(0)
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/cpv/cpv_nosyst_2019.png"
-c1.SaveAs(outname)
+outname1 = "plot_v4/cpv/cpv_nosyst_2019_v4.png"
+outname2 = "plot_v4/cpv/cpv_nosyst_2019_v4.eps"
+c1.SaveAs(outname1)
+c1.SaveAs(outname2)
 
 c2 = ROOT.TCanvas("c2","c2",800,800)
 c2.SetLeftMargin(0.15)
@@ -151,7 +154,7 @@ ROOT.gPad.RedrawAxis()
 
 t1.Draw("same")
 l1.Draw("same")
-outname = "plot/res/dcpres_nosyst_2019.png"
+outname = "plot_v4/res/dcpres_nosyst_2019_v4.png"
 c2.SaveAs(outname)
 
 c3 = ROOT.TCanvas("c3","c3",800,800)
@@ -170,5 +173,7 @@ t1.Draw("same")
 l1.Draw("same")
 line2.Draw("same")
 ROOT.gPad.RedrawAxis()
-outname = "plot/mh/mh_nosyst_2019.png"
-c3.SaveAs(outname)
+outname1 = "plot_v4/mh/mh_nosyst_2019_v4.png"
+outname2 = "plot_v4/mh/mh_nosyst_2019_v4.eps"
+c3.SaveAs(outname1)
+c3.SaveAs(outname2)

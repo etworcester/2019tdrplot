@@ -19,13 +19,12 @@ ROOT.gStyle.SetLineWidth(3)
 ROOT.gStyle.SetLineColor(1)
 ROOT.gStyle.SetTitleSize(0.03,"t")
 
-pilist = ["0", "-0.5pi", "+0.5pi"]
-#ssth23list = ["0.42", "0.5", "0.58"]
-ssth23list = ["0.58"]
+pilist = ["0", "mpi_2", "ppi_2"]
+ssth23list = ["0_58"]
 list7yr = []
 for pival in pilist:
     for ssth23 in ssth23list:
-        f = ROOT.TFile("root_callum/asimov_deltapi-ssth23_ndfd7year_allsyst_nopen_deltapi:"+pival+",ssth23:"+ssth23+"_hie1.root")
+        f = ROOT.TFile("root_v4/bubbles/deltapi-ssth23_ndfd_7year_deltapi_"+pival+"__ssth23_"+ssth23+"_nopen_hist.root")
         h = f.Get("deltapi_ssth23")
         hc = h.Clone()
         hc.SetDirectory(0)
@@ -35,7 +34,7 @@ for pival in pilist:
 list10yr = []
 for pival in pilist:
     for ssth23 in ssth23list:
-        f = ROOT.TFile("root_callum/asimov_deltapi-ssth23_ndfd10year_allsyst_nopen_deltapi:"+pival+",ssth23:"+ssth23+"_hie1.root")
+        f = ROOT.TFile("root_v4/bubbles/deltapi-ssth23_ndfd_10year_deltapi_"+pival+"__ssth23_"+ssth23+"_nopen_hist.root")
         h = f.Get("deltapi_ssth23")
         hc = h.Clone()
         hc.SetDirectory(0)
@@ -45,14 +44,14 @@ for pival in pilist:
 list15yr = []
 for pival in pilist:
     for ssth23 in ssth23list:
-        f = ROOT.TFile("root_callum/asimov_deltapi-ssth23_ndfd15year_allsyst_nopen_deltapi:"+pival+",ssth23:"+ssth23+"_hie1.root")
+        f = ROOT.TFile("root_v4/bubbles/deltapi-ssth23_ndfd_15year_deltapi_"+pival+"__ssth23_"+ssth23+"_nopen_hist.root")
         h = f.Get("deltapi_ssth23")
         hc = h.Clone()
         hc.SetDirectory(0)
         list15yr.append(hc)
     
 
-nufit = ROOT.TFile("root/nufit_dcpvq23_contours_rotate.root")
+nufit = ROOT.TFile("root_v3/nufit_dcpvq23_contours_rotate.root")
 h_no = nufit.Get("h_no")
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
@@ -140,7 +139,7 @@ l1.Draw("same")
 
 ROOT.gPad.RedrawAxis()
 
-outname = "plot/bubbles/bubbles_q23_nopen_2019.eps"
-outname2 = "plot/bubbles/bubbles_q23_nopen_2019.png"
+outname = "plot_v4/bubbles/bubbles_q23_nopen_2019_v4.eps"
+outname2 = "plot_v4/bubbles/bubbles_q23_nopen_2019_v4.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)

@@ -19,17 +19,16 @@ ROOT.gStyle.SetLineWidth(3)
 ROOT.gStyle.SetLineColor(1)
 ROOT.gStyle.SetTitleSize(0.03,"t")
 
-f1 = ROOT.TFile("root_callum/asimov_deltapi-ssth23_ndfd7year_allsyst_th13_asimov0_hie1.root")
+f1 = ROOT.TFile("root_v4/bubbles/asimov_deltapi-ssth23_ndfd7year_allsyst_th13_asimov0_hie1.root")
 hist1 = f1.Get("deltapi_ssth23")
 
-f2 = ROOT.TFile("root_callum/asimov_deltapi-ssth23_ndfd10year_allsyst_th13_asimov0_hie1.root")
+f2 = ROOT.TFile("root_v4/bubbles/asimov_deltapi-ssth23_ndfd10year_allsyst_th13_asimov0_hie1.root")
 hist2 = f2.Get("deltapi_ssth23")
 
-f3 = ROOT.TFile("root_callum/asimov_deltapi-ssth23_ndfd15year_allsyst_th13_asimov0_hie1.root")
+f3 = ROOT.TFile("root_v4/bubbles/asimov_deltapi-ssth23_ndfd15year_allsyst_th13_asimov0_hie1.root")
 hist3 = f3.Get("deltapi_ssth23")
 
-
-nufit = ROOT.TFile("root/nufit_dcpvq23_contours_rotate.root")
+nufit = ROOT.TFile("root_v3/nufit_dcpvq23_contours_rotate.root")
 h_no = nufit.Get("h_no")
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
@@ -80,27 +79,26 @@ hist2.Draw("cont3 same")
 hist3.SetContour(1)
 hist3.SetContourLevel(0,4.61)
 hist3.SetLineWidth(3)
-hist3.SetLineColor(ROOT.kGreen-7)
+hist3.SetLineColor(ROOT.kGreen+2)
 hist3.Draw("cont3 same")
 
 dcptrue = (215.*math.pi/180 - 2*math.pi)/math.pi
 s1 = ROOT.TMarker(dcptrue,0.580,29)
 s1.Draw("same")
-
     
-l1 = ROOT.TLegend(0.6,0.7,0.89,0.89)
+l1 = ROOT.TLegend(0.55,0.7,0.89,0.89)
 l1.AddEntry(hist1,"7 years (staged)","L")
 l1.AddEntry(hist2,"10 years (staged)","L")
 l1.AddEntry(hist3,"15 years (staged)","L")
 l1.AddEntry(box1, "NuFIT 4.0 90% C.L.", "F")
-l1.AddEntry(s1, "\"True\" Value","P")
+l1.AddEntry(s1, "True Value","P")
 l1.SetBorderSize(0)
 l1.SetFillStyle(0)
 l1.Draw("same")
 
 ROOT.gPad.RedrawAxis()
 
-outname = "plot_v3/bubbles/bubbles_q23_asimov0_2019.eps"
-outname2 = "plot_v3/bubbles/bubbles_q23_asimov0_2019.png"
+outname = "plot_v4/bubbles/bubbles_q23_asimov0_2019_v4.eps"
+outname2 = "plot_v4/bubbles/bubbles_q23_asimov0_2019_v4.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)

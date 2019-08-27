@@ -49,12 +49,12 @@ explist_nozero = [1,5,10,30,50,100,200,336,450,624,800,1104,1300,1500]
 explist = array('d',explist)
 explist_nozero = array('d',explist_nozero)
 
-f1 = ROOT.TFile("root/staging_convert.root")
+f1 = ROOT.TFile("root_v4/staging_convert.root")
 g_exp = f1.Get("g_exp")
 
 adict = {}
 ndict = {}
-f2 = ROOT.TFile("root/exposure_graphs_"+hier+".root")
+f2 = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root")
 for g in f2.GetListOfKeys():
       name = g.GetName()
       tmp = f2.Get(name)
@@ -104,9 +104,11 @@ mhbest_nom_5sig = g_mhsigbest_th13pen.Eval(5.0,0,"S")
 dcpres0_nom_10deg = g_dcpres0_th13pen.Eval(10.0,0,"S")
 dcpresneg_nom_20deg = g_dcpresneg_th13pen.Eval(20.0,0,"S")
 
+#g_th13res_nopen.Draw("alp")
+#raw_input()
 th13res_nom_005 = g_th13res_nopen.Eval(0.005,0,"S")
-th13res_nom_004 = g_th13res_nopen.Eval(0.004,0,"S")
-th13res_nom_003 = g_th13res_nopen.Eval(0.003,0,"S")
+th13res_nom_004 = g_th13res_nopen.Eval(0.004,0,"L")
+th13res_nom_003 = g_th13res_nopen.Eval(0.003,0,"L")
 
 print "CPV 75% (3 sigma): ", cpv75_nom_3sig, g_exp.Eval(cpv75_nom_3sig,0,"S")
 print "CPV 50% (3 sigma): ", cpv50_nom_3sig, g_exp.Eval(cpv50_nom_3sig,0,"S")

@@ -46,14 +46,13 @@ def fix (hist):
         j += 1
     return newh
 
-
-f1 = ROOT.TFile("root_v4/bubbles/deltapi-th13_ndfd_7year_deltapi_0_nopen_hist.root")
+f1 = ROOT.TFile("root_v4/bubbles/asimov_deltapi-th13_ndfd7year_allsyst_nopen_asimov0_hie1.root")
 rdcpz1 = f1.Get("deltapi_th13")
 
-f2 = ROOT.TFile("root_v4/bubbles/deltapi-th13_ndfd_10year_deltapi_0_nopen_hist.root")
+f2 = ROOT.TFile("root_v4/bubbles/asimov_deltapi-th13_ndfd10year_allsyst_nopen_asimov0_hie1.root")
 rdcpz2 = f2.Get("deltapi_th13")
 
-f3 = ROOT.TFile("root_v4/bubbles/deltapi-th13_ndfd_15year_deltapi_0_nopen_hist.root")
+f3 = ROOT.TFile("root_v4/bubbles/asimov_deltapi-th13_ndfd15year_allsyst_nopen_asimov0_hie1.root")
 rdcpz3 = f3.Get("deltapi_th13")
 
 nufit = ROOT.TFile("root_v3/nufit_dcpvq13_contours_rotate.root")
@@ -73,7 +72,7 @@ dcpz1.SetLineColor(ROOT.kBlue-7)
 
 dcpz2.SetLineColor(ROOT.kOrange-3)
 
-dcpz3.SetLineColor(ROOT.kGreen-7)
+dcpz3.SetLineColor(ROOT.kGreen+2)
 
 dcpz1.SetContour(1)
 dcpz1.SetContourLevel(0,4.61)
@@ -84,8 +83,7 @@ dcpz3.SetContourLevel(0,4.61)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
-#h1 = c1.DrawFrame(-1., 0.075, 1., 0.1)
-h1 = c1.DrawFrame(-1., 0.075, 1., 0.105)
+h1 = c1.DrawFrame(-1., 0.078, 1., 0.11)
 h1.GetYaxis().SetTitle("sin^{2}2#theta_{13}")
 h1.GetXaxis().SetTitle("#delta_{CP}/#pi")
 h1.GetXaxis().CenterTitle()
@@ -126,7 +124,7 @@ t1.SetBorderSize(0)
 t1.SetTextAlign(12)
 t1.Draw("same")
 
-l1 = ROOT.TLegend(0.55,0.55,0.89,0.7)
+l1 = ROOT.TLegend(0.5,0.55,0.89,0.72)
 l1.AddEntry(dcpz1,"7 years (staged)","L")
 l1.AddEntry(dcpz2,"10 years (staged)","L")
 l1.AddEntry(dcpz3,"15 years (staged)","L")

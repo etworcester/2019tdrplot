@@ -46,55 +46,55 @@ else:
       print "Must supply nh or ih!"
       exit()
 
-g_cpvsig_75_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsig75_nopen")
-g_cpvsig_50_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsig50_nopen")
-g_cpvsig_best_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsigbest_nopen")
+g_cpvsig_75_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsig75_nopen")
+g_cpvsig_50_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsig50_nopen")
+g_cpvsig_best_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsigbest_nopen")
 
-g_cpvsig_75_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsig75_th13pen")
-g_cpvsig_50_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsig50_th13pen")
-g_cpvsig_best_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsigbest_th13pen")
+g_cpvsig_75_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsig75_th13pen")
+g_cpvsig_50_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsig50_th13pen")
+g_cpvsig_best_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsigbest_th13pen")
 
-g_cpvsig_75_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsig75_nopen")
-g_cpvsig_50_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsig50_nopen")
-g_cpvsig_best_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsigbest_nopen")
+g_cpvsig_75_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsig75_nopen")
+g_cpvsig_50_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsig50_nopen")
+g_cpvsig_best_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsigbest_nopen")
 
-g_cpvsig_75_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsig75_th13pen")
-g_cpvsig_50_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsig50_th13pen")
-g_cpvsig_best_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("cpvsigbest_th13pen")
+g_cpvsig_75_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsig75_th13pen")
+g_cpvsig_50_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsig50_th13pen")
+g_cpvsig_best_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("cpvsigbest_th13pen")
 
-g_mhsig_100_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsig100_nopen")
-g_mhsig_best_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsigbest_nopen")
+g_mhsig_100_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("mhsig100_nopen")
+g_mhsig_best_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("mhsigbest_nopen")
 
-g_mhsig_100_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsig100_th13pen")
-g_mhsig_best_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsigbest_th13pen")
+g_mhsig_100_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("mhsig100_th13pen")
+g_mhsig_best_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("mhsigbest_th13pen")
 
-g_mhsig_100_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsig100_nopen")
-g_mhsig_best_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsigbest_nopen")
+g_mhsig_100_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("mhsig100_nopen")
+g_mhsig_best_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("mhsigbest_nopen")
 
-g_mhsig_100_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsig100_th13pen")
-g_mhsig_best_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("mhsigbest_th13pen")
+g_mhsig_100_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("mhsig100_th13pen")
+g_mhsig_best_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("mhsigbest_th13pen")
 
-g_dcpres0_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpres0_th13pen")
-g_dcpresneg_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpresneg_th13pen")
-g_th23res_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th23res_th13pen")
-g_dmsqres_hi_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dmsqres_th13pen")
+g_dcpres0_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dcpres0_th13pen")
+g_dcpresneg_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dcpresneg_th13pen")
+g_th23res_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("th23res_th13pen")
+g_dmsqres_hi_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dmsqres_th13pen")
 
-g_dcpres0_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpres0_nopen")
-g_dcpresneg_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpresneg_nopen")
-g_th23res_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th23res_nopen")
-g_dmsqres_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dmsqres_nopen")
-g_th13res_lo_full = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th13res_nopen")
+g_dcpres0_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dcpres0_nopen")
+g_dcpresneg_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dcpresneg_nopen")
+g_th23res_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("th23res_nopen")
+g_dmsqres_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dmsqres_nopen")
+g_th13res_lo_full = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("th13res_nopen")
 
-g_dcpres0_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpres0_th13pen")
-g_dcpresneg_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpresneg_th13pen")
-g_th23res_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th23res_th13pen")
-g_dmsqres_hi_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dmsqres_th13pen")
+g_dcpres0_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dcpres0_th13pen")
+g_dcpresneg_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dcpresneg_th13pen")
+g_th23res_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("th23res_th13pen")
+g_dmsqres_hi_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dmsqres_th13pen")
 
-g_dcpres0_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpres0_nopen")
-g_dcpresneg_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dcpresneg_nopen")
-g_th23res_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th23res_nopen")
-g_dmsqres_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("dmsqres_nopen")
-g_th13res_lo_prelim = ROOT.TFile("root/exposure_graphs_"+hier+".root").Get("th13res_nopen")
+g_dcpres0_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dcpres0_nopen")
+g_dcpresneg_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dcpresneg_nopen")
+g_th23res_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("th23res_nopen")
+g_dmsqres_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("dmsqres_nopen")
+g_th13res_lo_prelim = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root").Get("th13res_nopen")
 
 
 explist = [0,1,5,10,30,50,100,200,336,450,624,800,1104,1300,1500]
@@ -210,7 +210,7 @@ while year < 15.01:
       count +=1
       year += 0.25
 
-f_out = ROOT.TFile("root/staging_convert.root","RECREATE")
+f_out = ROOT.TFile("root_v4/staging_convert.root","RECREATE")
 g_staging.SetName("g_exp")
 g_staging.Write()
 f_out.Close()
@@ -361,8 +361,8 @@ t5sig.SetFillColor(0)
 t5sig.SetBorderSize(0)
 t5sig.Draw("same")
 
-outname = "plot/exposures/cpv_exp_staging_varyconstr_"+hier+"_2019.eps"
-outname2 = "plot/exposures/cpv_exp_staging_varyconstr_"+hier+"_2019.png"
+outname = "plot_v4/exposures/cpv_exp_staging_varyconstr_"+hier+"_2019_v4.eps"
+outname2 = "plot_v4/exposures/cpv_exp_staging_varyconstr_"+hier+"_2019_v4.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)                               
 
@@ -426,8 +426,8 @@ line3.SetLineStyle(2)
 line3.SetLineWidth(3)
 line3.Draw("same")
 
-outname = "plot/exposures/mh_exp_staging_varyconstr_"+hier+"_2019.eps"
-outname2 = "plot/exposures/mh_exp_staging_varyconstr_"+hier+"_2019.png"
+outname = "plot_v4/exposures/mh_exp_staging_varyconstr_"+hier+"_2019_v4.eps"
+outname2 = "plot_v4/exposures/mh_exp_staging_varyconstr_"+hier+"_2019_v4.png"
 c2.SaveAs(outname)
 c2.SaveAs(outname2)                               
 
@@ -481,8 +481,8 @@ if (hier == "nh"):
       l1.SetBorderSize(0)
       l1.Draw("same")
       
-      outname = "plot/res/dcp_exp_staging_varyconstr_"+hier+"_2019.eps"
-      outname2 = "plot/res/dcp_exp_staging_varyconstr_"+hier+"_2019.png"
+      outname = "plot_v4/res/dcp_exp_staging_varyconstr_"+hier+"_2019_v4.eps"
+      outname2 = "plot_v4/res/dcp_exp_staging_varyconstr_"+hier+"_2019_v4.png"
       c3.SaveAs(outname)
       c3.SaveAs(outname2)                               
 
@@ -523,8 +523,8 @@ if (hier == "nh"):
       l1.SetBorderSize(0)
       l1.Draw("same")
       
-      outname = "plot/res/th23_exp_staging_varyconstr_"+hier+"_2019.eps"
-      outname2 = "plot/res/th23_exp_staging_varyconstr_"+hier+"_2019.png"
+      outname = "plot_v4/res/th23_exp_staging_varyconstr_"+hier+"_2019_v4.eps"
+      outname2 = "plot_v4/res/th23_exp_staging_varyconstr_"+hier+"_2019_v4.png"
       c4.SaveAs(outname)
       c4.SaveAs(outname2)                               
 
@@ -562,8 +562,8 @@ if (hier == "nh"):
       l1.SetBorderSize(0)
       l1.Draw("same")
       
-      outname = "plot/res/dmsq_exp_staging_varyconstr_"+hier+"_2019.eps"
-      outname2 = "plot/res/dmsq_exp_staging_varyconstr_"+hier+"_2019.png"
+      outname = "plot_v4/res/dmsq_exp_staging_varyconstr_"+hier+"_2019_v4.eps"
+      outname2 = "plot_v4/res/dmsq_exp_staging_varyconstr_"+hier+"_2019_v4.png"
       c5.SaveAs(outname)
       c5.SaveAs(outname2)                               
 
@@ -593,8 +593,8 @@ if (hier == "nh"):
       t1.Draw("same")
       l1.Draw("same")
 
-      outname = "plot/res/th13_exp_staging_varyconstr_"+hier+"_2019.eps"
-      outname2 = "plot/res/th13_exp_staging_varyconstr_"+hier+"_2019.png"
+      outname = "plot_v4/res/th13_exp_staging_varyconstr_"+hier+"_2019_v4.eps"
+      outname2 = "plot_v4/res/th13_exp_staging_varyconstr_"+hier+"_2019_v4.png"
       c6.SaveAs(outname)
       c6.SaveAs(outname2)                               
       

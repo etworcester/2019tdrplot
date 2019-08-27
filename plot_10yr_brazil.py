@@ -31,44 +31,47 @@ else:
       print "Must supply nh or ih!"
       exit()
 
-f1text = "root_v4/throws/graphs_final.root"
+
+f1text = "root_v4/sens_staging/mh_sens_ndfd_624kTMWyr_allsyst_th13_hie1_asimov0_v4.root"
 f1 = ROOT.TFile(f1text)
-if (hier == 'nh'):
-      cpv1 = f1.Get("cpv_th23all1sigma_th13_7yr")
-      cpv2 = f1.Get("cpv_th23all1sigma_th13_10yr")
-      cpv3 = f1.Get("mh_th23all1sigma_th13_7yr")
-      cpv4 = f1.Get("mh_th23all1sigma_th13_10yr")
-elif (hier == 'ih'):
-      cpv1 = f1.Get("cpv_th23all1sigma_th13_7yr_IH")
-      cpv2 = f1.Get("cpv_th23all1sigma_th13_10yr_IH")
-      cpv3 = f1.Get("mh_th23all1sigma_th13_7yr_IH")
-      cpv4 = f1.Get("mh_th23all1sigma_th13_10yr_IH")
+mh1 = f1.Get("sens_mh_nh")
+mh1.SetLineWidth(4)
+mh1.SetLineColor(ROOT.kBlue)
 
+f1atext = "root_v4/sens_staging/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_asimov0_v4.root"
+f1a = ROOT.TFile(f1atext)
+cpv1 = f1a.Get("sens_cpv_nh")
 cpv1.SetLineWidth(4)
-cpv1.SetLineColor(ROOT.kBlue-7)
-cpv2.SetLineWidth(4)
-cpv2.SetLineColor(ROOT.kOrange-3)
+cpv1.SetLineColor(ROOT.kBlue)
 
-cpv1.SetFillStyle(1001)
-cpv2.SetFillStyle(1001)
+f2text = "root_v4/throws/graphs_final.root"      
+f2 = ROOT.TFile(f2text)
+band2 = f2.Get("cpv_th23upper1sigma_th13_10yr")
+band2a = f2.Get("cpv_th23upper2sigma_th13_10yr")
 
-cpv1.SetFillColorAlpha(ROOT.kBlue-7,0.5)
-cpv2.SetFillColorAlpha(ROOT.kOrange-3,0.5)
+band4 = f2.Get("mh_th23upper1sigma_th13_10yr")
+band4a = f2.Get("mh_th23upper2sigma_th13_10yr")
 
-cpv3.SetLineWidth(4)
-cpv3.SetLineColor(ROOT.kBlue-7)
-cpv4.SetLineWidth(4)
-cpv4.SetLineColor(ROOT.kOrange-3)
+band2.SetFillStyle(1001)
+band2a.SetFillStyle(1001)
+band2.SetFillColor(ROOT.kGreen)
+band2a.SetFillColor(ROOT.kYellow)
 
-cpv3.SetFillStyle(1001)
-cpv4.SetFillStyle(1001)
+band2.SetLineColor(0)
+band2a.SetLineColor(0)
 
-cpv3.SetFillColorAlpha(ROOT.kBlue-7,0.5)
-cpv4.SetFillColorAlpha(ROOT.kOrange-3,0.5)
+band4.SetFillStyle(1001)
+band4a.SetFillStyle(1001)
+
+band4.SetFillColor(ROOT.kGreen)
+band4a.SetFillColor(ROOT.kYellow)
+
+band4.SetLineColor(0)
+band4a.SetLineColor(0)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
-h1 = c1.DrawFrame(-1.0,0.0,1.0,13.0)
+h1 = c1.DrawFrame(-1.0,0.0,1.0,11.5)
 h1.SetTitle("CP Violation Sensitivity")
 h1.GetXaxis().SetTitle("#delta_{CP}/#pi")
 h1.GetXaxis().CenterTitle()
@@ -76,35 +79,30 @@ h1.GetYaxis().SetTitle("#sigma = #sqrt{#bar{#Delta#chi^{2}}}")
 h1.GetYaxis().SetTitleOffset(1.3)
 h1.GetYaxis().CenterTitle()
 c1.Modified()
-cpv2.Draw("l e3 same")
-cpv1.Draw("l e3 same")
+band2a.Draw("e3 same")
+band2.Draw("e3 same")
+cpv1.Draw("l same")
 ROOT.gPad.RedrawAxis()
 
-t1 = ROOT.TPaveText(0.16,0.7,0.5,0.89,"NDC")
+t1 = ROOT.TPaveText(0.16,0.72,0.5,0.89,"NDC")
 t1.AddText("DUNE Sensitivity")
 t1.AddText("All Systematics")
 t1.AddText(htext)
-t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
-t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+if (hier == 'nh'):
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("sin^{2}#theta_{23} = upper octant")
+elif (hier == 'ih'):
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("sin^{2}#theta_{23} = upper octant")
 t1.SetFillStyle(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)
 t1.Draw("same")
 
-band_dum = cpv2.Clone()
-band_dum.SetFillColorAlpha(ROOT.kBlack,0.25)
-band_dum.SetLineColor(0)
-cpv_dum = cpv1.Clone()
-cpv_dum.SetLineColor(ROOT.kBlack)
-null = ROOT.TObject()
-
 l1 = ROOT.TLegend(0.52,0.68,0.89,0.89)
-l1.AddEntry(cpv1,"7 years (staged)", "L")
-l1.AddEntry(cpv2,"10 years (staged)", "L")
-l1.AddEntry(cpv_dum,"Median of Throws","L")
-l1.AddEntry(band_dum, "1#sigma: Variations of","F")
-l1.AddEntry(null,"statistics, systematics,","")
-l1.AddEntry(null,"and oscillation parameters","")
+l1.AddEntry(cpv1,"10 years (staged, Asimov)", "L")
+l1.AddEntry(band2, "1#sigma variations","F")
+l1.AddEntry(band2a, "2#sigma variations","F")
 l1.SetBorderSize(0)
 l1.SetFillStyle(0)
 
@@ -132,14 +130,14 @@ t5sig.SetBorderSize(0)
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname1 = "plot_v4/cpv/cpv_two_exps_throws_"+hier+"_2019_v4.png"
-outname2 = "plot_v4/cpv/cpv_two_exps_throws_"+hier+"_2019_v4.eps"
+outname1 = "plot_v4/cpv/cpv_10yr_throws_"+hier+"_brazil_2019_v4.png"
+outname2 = "plot_v4/cpv/cpv_10yr_throws_"+hier+"_brazil_2019_v4.eps"
 c1.SaveAs(outname1)
 c1.SaveAs(outname2)
 
 c2 = ROOT.TCanvas("c2","c2",800,800)
 c2.SetLeftMargin(0.15)
-h2 = c2.DrawFrame(-1.0,0.0,1.0,40.0)
+h2 = c2.DrawFrame(-1.0,0.0,1.0,45.0)
 h2.SetTitle("Mass Ordering Sensitivity")
 h2.GetXaxis().SetTitle("#delta_{CP}/#pi")
 h2.GetXaxis().CenterTitle()
@@ -147,17 +145,21 @@ h2.GetYaxis().SetTitle("#sqrt{#bar{#Delta#chi^{2}}}")
 h2.GetYaxis().SetTitleOffset(1.3)
 h2.GetYaxis().CenterTitle()
 c2.Modified()
-cpv4.Draw("l e3 same")
-cpv3.Draw("l e3 same")
-
+band4a.Draw("e3 same")
+band4.Draw("e3 same")
+mh1.Draw("l same")
 ROOT.gPad.RedrawAxis()
 
-t1 = ROOT.TPaveText(0.16,0.7,0.5,0.89,"NDC")
+t1 = ROOT.TPaveText(0.16,0.72,0.5,0.89,"NDC")
 t1.AddText("DUNE Sensitivity")
 t1.AddText("All Systematics")
 t1.AddText(htext)
-t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
-t1.AddText("0.4 < sin^{2}#theta_{23} < 0.6")
+if (hier == 'nh'):
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("sin^{2}#theta_{23} = upper octant")
+elif (hier == 'ih'):
+      t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+      t1.AddText("sin^{2}#theta_{23} = upper octant")
 t1.SetFillStyle(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)
@@ -170,8 +172,8 @@ line2.Draw("same")
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname1 = "plot_v4/mh/mh_two_exps_throws_"+hier+"_2019_v4.png"
-outname2 = "plot_v4/mh/mh_two_exps_throws_"+hier+"_2019_v4.eps"
+outname1 = "plot_v4/mh/mh_10yr_throws_"+hier+"_brazil_2019_v4.png"
+outname2 = "plot_v4/mh/mh_10yr_throws_"+hier+"_brazil_2019_v4.eps"
 c2.SaveAs(outname1)
 c2.SaveAs(outname2)
 

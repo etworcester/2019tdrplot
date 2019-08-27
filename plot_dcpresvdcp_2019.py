@@ -36,13 +36,13 @@ def filldiff(up,down):
       return diffgraph;
 
 
-f1 = ROOT.TFile("root_chris/cpv_res_tdr_minus1to1.root")
-g1 = f1.Get("th13_7yr")
-g1nopen = f1.Get("nopen_7yr")
-g2 = f1.Get("th13_10yr")
-g2nopen = f1.Get("nopen_10yr")
-g3 = f1.Get("th13_15yr")
-g3nopen = f1.Get("nopen_15yr")
+f1 = ROOT.TFile("root_v4/throws/graphs_final.root")
+g1 = f1.Get("dcp_th23upper_th13_7yr")
+g1nopen = f1.Get("dcp_th23upper_np_7yr")
+g2 = f1.Get("dcp_th23upper_th13_10yr")
+g2nopen = f1.Get("dcp_th23upper_np_10yr")
+g3 = f1.Get("dcp_th23upper_th13_15yr")
+g3nopen = f1.Get("dcp_th23upper_np_15yr")
 
 r1s =ROOT.TGraphSmooth("normal")
 r1 = r1s.SmoothKern(g1,"normal",0.25)
@@ -132,8 +132,8 @@ l1.SetFillStyle(0)
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
 
-outname = "plot/res/dcpresvdcp_smooth.eps"
-outname2 = "plot/res/dcpresvdcp_smooth.png"
+outname = "plot_v4/res/dcpresvdcp_smooth_v4.eps"
+outname2 = "plot_v4/res/dcpresvdcp_smooth_v4.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)
 

@@ -55,24 +55,24 @@ def filldiff(mm,up,down,mid):
             i += 1
       return diffgraph
   
-f1 = ROOT.TFile("root_callum/cpv_sens_ndfd10year_allsyst_th13_asimov0_hie1_v3.root")
+f1 = ROOT.TFile("root_v4/oa_variations_10year/cpv_sens_ndfd10year_allsyst_th13_asimov0_hie1_v4.root")
 cpv1 = f1.Get("sens_cpv_nh")
-f1m = ROOT.TFile("root_callum/mh_sens_ndfd10year_allsyst_th13_asimov0_hie1_v3.root")
+f1m = ROOT.TFile("root_v4/oa_variations_10year/mh_sens_ndfd10year_allsyst_th13_asimov0_hie1_v4.root")
 mh1 = f1m.Get("sens_mh_nh")
 
-f2 = ROOT.TFile("root_callum/cpv_sens_ndfd10year_allsyst_th13_asimov5_hie1_v3.root")
+f2 = ROOT.TFile("root_v4/oa_variations_10year/cpv_sens_ndfd10year_allsyst_th13_asimov5_hie1_v4.root")
 cpv2 = f2.Get("sens_cpv_nh")
-f2m = ROOT.TFile("root_callum/mh_sens_ndfd10year_allsyst_th13_asimov5_hie1_v3.root")
+f2m = ROOT.TFile("root_v4/oa_variations_10year/mh_sens_ndfd10year_allsyst_th13_asimov5_hie1_v4.root")
 mh2 = f2m.Get("sens_mh_nh")
 
-f3 = ROOT.TFile("root_callum/cpv_sens_ndfd10year_allsyst_th13_asimov4_hie1_v3.root")
+f3 = ROOT.TFile("root_v4/oa_variations_10year/cpv_sens_ndfd10year_allsyst_th13_asimov4_hie1_v4.root")
 cpv3 = f3.Get("sens_cpv_nh")
-f3m = ROOT.TFile("root_callum/mh_sens_ndfd10year_allsyst_th13_asimov4_hie1_v3.root")
+f3m = ROOT.TFile("root_v4/oa_variations_10year/mh_sens_ndfd10year_allsyst_th13_asimov4_hie1_v4.root")
 mh3 = f3m.Get("sens_mh_nh")
 
-f4 = ROOT.TFile("root_callum/cpv_sens_ndfd10year_allsyst_th13_asimov3_hie1_v3.root")
+f4 = ROOT.TFile("root_v4/oa_variations_10year/cpv_sens_ndfd10year_allsyst_th13_asimov3_hie1_v4.root")
 cpv4 = f4.Get("sens_cpv_nh")
-f4m = ROOT.TFile("root_callum/mh_sens_ndfd10year_allsyst_th13_asimov3_hie1_v3.root")
+f4m = ROOT.TFile("root_v4/oa_variations_10year/mh_sens_ndfd10year_allsyst_th13_asimov3_hie1_v4.root")
 mh4 = f4m.Get("sens_mh_nh")
 
 graph_cpvrange = filldiff(cpv1,cpv2,cpv3,cpv4)
@@ -155,8 +155,8 @@ t5sig.Draw("same")
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/vary_params/cpv_varyth23_2019.eps"
-outname2 = "plot/vary_params/cpv_varyth23_2019.png"
+outname = "plot_v4/vary_params/cpv_varyth23_2019_v4.eps"
+outname2 = "plot_v4/vary_params/cpv_varyth23_2019_v4.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)
 
@@ -197,8 +197,8 @@ ROOT.gPad.RedrawAxis()
 t1.Draw("same")
 
 l1.Draw("same")
-outname = "plot/vary_params/mh_varyth23_2019.eps"
-outname2 = "plot/vary_params/mh_varyth23_2019.png"
+outname = "plot_v4/vary_params/mh_varyth23_2019_v4.eps"
+outname2 = "plot_v4/vary_params/mh_varyth23_2019_v4.png"
 c2.SaveAs(outname)
 c2.SaveAs(outname2)
 

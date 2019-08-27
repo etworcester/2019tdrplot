@@ -35,6 +35,24 @@ def filldiff(up,down):
           i += 1
       return diffgraph;
 
+def fix450(graph):
+      print "Warning: hack in place to interpolate bad point in "+graph.GetName()
+      expup = ROOT.Double(0.0)
+      expdown = ROOT.Double(0.0)
+      exptarget = ROOT.Double(0.0)
+      valup = ROOT.Double(0.0)
+      valdown = ROOT.Double(0.0)
+      valtarget = ROOT.Double(0.0)
+      up = graph.GetPoint(7,expup,valup)
+      down = graph.GetPoint(9,expdown,valdown)
+      target = graph.GetPoint(8,exptarget,valtarget)
+      m = (valup-valdown)/(expup-expdown)
+      b = valup - m*expup
+      ynew = m*exptarget + b
+      print valtarget, ynew
+      graph.SetPoint(8,exptarget,ynew)
+      return graph
+
 hier = sys.argv[1]
 if (hier == 'nh'):
       htext = "Normal Ordering"
@@ -67,7 +85,7 @@ for myexp in explist:
             continue
 
       #No th13 penalty CPV
-      filename = "root_callum/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_nopen_hie"+hnum+"_v3.root"
+      filename = "root_v4/sens_staging/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_nopen_hie"+hnum+"_asimov0_v4.root"
       f1 = ROOT.TFile(filename)
       cpvgraph_lo = f1.Get("sens_cpv_"+hier)
       nvals = cpvgraph_lo.GetN()
@@ -92,7 +110,7 @@ for myexp in explist:
       f1.Close()
 
       #Th13 Penalty CPV
-      filename = "root_callum/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_v3.root"
+      filename = "root_v4/sens_staging/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov0_v4.root"
       f1 = ROOT.TFile(filename)
       cpvgraph_hi = f1.Get("sens_cpv_"+hier)
       nvals = cpvgraph_hi.GetN()
@@ -114,7 +132,7 @@ for myexp in explist:
       f1.Close()
 
       #No th13 penalty MH
-      filename = "root_callum/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_nopen_hie"+hnum+"_v3.root"
+      filename = "root_v4/sens_staging/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_nopen_hie"+hnum+"_asimov0_v4.root"
       f1 = ROOT.TFile(filename)
       mhgraph_lo = f1.Get("sens_mh_"+hier)
       nvals = mhgraph_lo.GetN()
@@ -134,7 +152,7 @@ for myexp in explist:
       f1.Close()
 
       #Th13 Penalty MH
-      filename = "root_callum/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_v3.root"
+      filename = "root_v4/sens_staging/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov0_v4.root"
       f1 = ROOT.TFile(filename)
       mhgraph_hi = f1.Get("sens_mh_"+hier)
       nvals = mhgraph_hi.GetN()
@@ -205,7 +223,6 @@ g_mhsig_best_lo.SetLineWidth(3)
 g_mhsig_best_lo.SetLineStyle(3)
 g_mhsig_best_hi.SetLineWidth(3)
 
-
 graph_cpvrange75 = filldiff(g_cpvsig_75_hi,g_cpvsig_75_lo)
 graph_cpvrange50 = filldiff(g_cpvsig_50_hi,g_cpvsig_50_lo)
 graph_cpvbestrange = filldiff(g_cpvsig_best_hi,g_cpvsig_best_lo)
@@ -213,18 +230,23 @@ graph_cpvbestrange = filldiff(g_cpvsig_best_hi,g_cpvsig_best_lo)
 graph_mhrange100 = filldiff(g_mhsig_100_hi, g_mhsig_100_lo)
 graph_mhrangebest = filldiff(g_mhsig_best_hi, g_mhsig_best_lo)
 
-f_resdcp = ROOT.TFile("root_chris/dcpres_vs_exposure.root")
-graph_dcpres0_noconstr = f_resdcp.Get("nopen_dcp0pi")
-graph_dcpres0_th13 = f_resdcp.Get("th13_dcp0pi")
-graph_dcpresneg_noconstr = f_resdcp.Get("nopen_dcp1.5pi")
-graph_dcpresneg_th13 = f_resdcp.Get("th13_dcp1.5pi")
+f_res = ROOT.TFile("root_v4/throws/res_vs_exposure.root")
+graph_dcpres0_noconstr = f_res.Get("asimov10_dcp_nopen")
+graph_dcpres0_th13 = f_res.Get("asimov10_dcp_th13")
+graph_dcpresneg_noconstr = f_res.Get("asimov11_dcp_nopen")
+graph_dcpresneg_th13 = f_res.Get("asimov11_dcp_th13")
 
-f_res = ROOT.TFile("root_chris/res_vs_exposure.root")
-graph_th13res_noconstr = f_res.Get("ss2th13_nopen")
-graph_th23res_noconstr = f_res.Get("ss2th23_nopen")
-graph_th23res_th13 = f_res.Get("ss2th23_th13")
-graph_dmsqres_noconstr = f_res.Get("dmsq32_nopen")
-graph_dmsqres_th13 = f_res.Get("dmsq32_th13")
+f_res = ROOT.TFile("root_v4/throws/res_vs_exposure.root")
+graph_th13res_noconstr = f_res.Get("asimov0_th13_nopen")
+graph_th23res_noconstr = f_res.Get("asimov0_th23_nopen")
+graph_th23res_th13 = f_res.Get("asimov0_th23_th13")
+graph_dmsqres_noconstr = f_res.Get("asimov0_dm2_nopen")
+graph_dmsqres_th13 = f_res.Get("asimov0_dm2_th13")
+
+#hack to fix the some plots
+graph_th13res_noconstr = fix450(graph_th13res_noconstr)
+graph_th23res_noconstr = fix450(graph_th23res_noconstr)
+#graph_th23res_th13 = fix450(graph_th23res_th13)
 
 graph_diff_dcpres0 = filldiff(graph_dcpres0_noconstr,graph_dcpres0_th13)
 graph_diff_dcpresneg = filldiff(graph_dcpresneg_noconstr,graph_dcpresneg_th13)
@@ -249,7 +271,7 @@ graph_th13res_noconstr.SetLineStyle(3)
 graph_th23res_noconstr.SetLineStyle(3)
 graph_dmsqres_noconstr.SetLineStyle(3)
 
-myout = ROOT.TFile("root/exposure_graphs_"+hier+".root","recreate")
+myout = ROOT.TFile("root_v4/exposure_graphs_"+hier+".root","recreate")
 g_cpvsig_75_lo.SetName("cpvsig75_nopen")
 g_cpvsig_50_lo.SetName("cpvsig50_nopen")
 g_cpvsig_best_lo.SetName("cpvsigbest_nopen")
@@ -292,7 +314,6 @@ graph_th23res_noconstr.Write()
 graph_dmsqres_noconstr.Write()
 graph_th23res_th13.Write()
 graph_dmsqres_th13.Write()
-
 myout.Close()
 
 
@@ -372,8 +393,8 @@ t5sig.SetFillStyle(0)
 t5sig.SetBorderSize(0)
 #t5sig.Draw("same")
 
-outname = "plot/exposures/cpv_exp_varyconstr_"+hier+"_2019.eps"
-outname2 = "plot/exposures/cpv_exp_varyconstr_"+hier+"_2019.png"
+outname = "plot_v4/exposures/cpv_exp_varyconstr_"+hier+"_2019_v4.eps"
+outname2 = "plot_v4/exposures/cpv_exp_varyconstr_"+hier+"_2019_v4.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)
 
@@ -415,8 +436,8 @@ line3.SetLineStyle(2)
 line3.SetLineWidth(3)
 line3.Draw("same")
 
-outname = "plot/exposures/mh_exp_varyconstr_"+hier+"_2019.eps"
-outname2 = "plot/exposures/mh_exp_varyconstr_"+hier+"_2019.png"
+outname = "plot_v4/exposures/mh_exp_varyconstr_"+hier+"_2019_v4.eps"
+outname2 = "plot_v4/exposures/mh_exp_varyconstr_"+hier+"_2019_v4.png"
 c2.SaveAs(outname)
 c2.SaveAs(outname2)
 
@@ -464,11 +485,10 @@ if (hier == "nh"):
       lm1.SetFillStyle(0)
       lm1.Draw("same")
 
-      outname = "plot/res/dcpres_exp_varyconstr_"+hier+"_2019.eps"
-      outname2 = "plot/res/dcpres_exp_varyconstr_"+hier+"_2019.png"
+      outname = "plot_v4/res/dcpres_exp_varyconstr_"+hier+"_2019_v4.eps"
+      outname2 = "plot_v4/res/dcpres_exp_varyconstr_"+hier+"_2019_v4.png"
       c3.SaveAs(outname)
       c3.SaveAs(outname2)
-
 
       c4 = ROOT.TCanvas("c4","c4",800,800)
       c4.SetLeftMargin(0.15)
@@ -482,8 +502,8 @@ if (hier == "nh"):
       graph_diff_th23res.SetFillColor(ROOT.kCyan+3)
       graph_diff_th23res.SetLineColor(0)
       graph_diff_th23res.Draw("F same")
-      graph_th23res_noconstr.Draw("L same")
-      graph_th23res_th13.Draw("L same")
+      graph_th23res_noconstr.Draw("l same")
+      graph_th23res_th13.Draw("l same")
 
       t2.Draw("same")
 
@@ -494,8 +514,8 @@ if (hier == "nh"):
       lm1.SetFillStyle(0)
       lm1.Draw("same")
 
-      outname = "plot/res/th23res_exp_varyconstr_"+hier+"_2019.eps"
-      outname2 = "plot/res/th23res_exp_varyconstr_"+hier+"_2019.png"
+      outname = "plot_v4/res/th23res_exp_varyconstr_"+hier+"_2019_v4.eps"
+      outname2 = "plot_v4/res/th23res_exp_varyconstr_"+hier+"_2019_v4.png"
       c4.SaveAs(outname)
       c4.SaveAs(outname2)
 
@@ -537,8 +557,8 @@ if (hier == "nh"):
       lm1.SetFillStyle(0)
       lm1.Draw("same")
 
-      outname = "plot/res/dmsqres_exp_varyconstr_"+hier+"_2019.eps"
-      outname2 = "plot/res/dmsqres_exp_varyconstr_"+hier+"_2019.png"
+      outname = "plot_v4/res/dmsqres_exp_varyconstr_"+hier+"_2019_v4.eps"
+      outname2 = "plot_v4/res/dmsqres_exp_varyconstr_"+hier+"_2019_v4.png"
       c5.SaveAs(outname)
       c5.SaveAs(outname2)
 
@@ -553,7 +573,7 @@ if (hier == "nh"):
       c6.Modified()
       graph_th13res_noconstr.SetLineWidth(4)
       graph_th13res_noconstr.SetLineColor(ROOT.kCyan+3)
-      graph_th13res_noconstr.Draw("L same")
+      graph_th13res_noconstr.Draw("l same")
 
       t3.Draw("same")
 
@@ -563,8 +583,8 @@ if (hier == "nh"):
       lm1.SetFillStyle(0)
       lm1.Draw("same")
 
-      outname = "plot/res/th13res_exp_varyconstr_"+hier+"_2019.eps"
-      outname2 = "plot/res/th13res_exp_varyconstr_"+hier+"_2019.png"
+      outname = "plot_v4/res/th13res_exp_varyconstr_"+hier+"_2019_v4.eps"
+      outname2 = "plot_v4/res/th13res_exp_varyconstr_"+hier+"_2019_v4.png"
       c6.SaveAs(outname)
       c6.SaveAs(outname2)
       

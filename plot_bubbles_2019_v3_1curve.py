@@ -46,14 +46,13 @@ def fix (hist):
         j += 1
     return newh
 
-
-f1 = ROOT.TFile("root_v4/bubbles/deltapi-th13_ndfd_7year_deltapi_0_nopen_hist.root")
+f1 = ROOT.TFile("root_callum_v3/asimov_deltapi-th13_ndfd7year_allsyst_nopen_asimov0_hie1.root")
 rdcpz1 = f1.Get("deltapi_th13")
 
-f2 = ROOT.TFile("root_v4/bubbles/deltapi-th13_ndfd_10year_deltapi_0_nopen_hist.root")
+f2 = ROOT.TFile("root_callum_v3/asimov_deltapi-th13_ndfd10year_allsyst_nopen_asimov0_hie1.root")
 rdcpz2 = f2.Get("deltapi_th13")
 
-f3 = ROOT.TFile("root_v4/bubbles/deltapi-th13_ndfd_15year_deltapi_0_nopen_hist.root")
+f3 = ROOT.TFile("root_callum_v3/asimov_deltapi-th13_ndfd15year_allsyst_nopen_asimov0_hie1.root")
 rdcpz3 = f3.Get("deltapi_th13")
 
 nufit = ROOT.TFile("root_v3/nufit_dcpvq13_contours_rotate.root")
@@ -73,7 +72,7 @@ dcpz1.SetLineColor(ROOT.kBlue-7)
 
 dcpz2.SetLineColor(ROOT.kOrange-3)
 
-dcpz3.SetLineColor(ROOT.kGreen-7)
+dcpz3.SetLineColor(ROOT.kGreen+2)
 
 dcpz1.SetContour(1)
 dcpz1.SetContourLevel(0,4.61)
@@ -85,7 +84,7 @@ dcpz3.SetContourLevel(0,4.61)
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
 #h1 = c1.DrawFrame(-1., 0.075, 1., 0.1)
-h1 = c1.DrawFrame(-1., 0.075, 1., 0.105)
+h1 = c1.DrawFrame(-1., 0.078, 1., 0.1)
 h1.GetYaxis().SetTitle("sin^{2}2#theta_{13}")
 h1.GetXaxis().SetTitle("#delta_{CP}/#pi")
 h1.GetXaxis().CenterTitle()
@@ -106,8 +105,8 @@ box1 = ROOT.TBox(41.1,-180,43.8,120)
 box1.SetFillColor(ROOT.kYellow-7)
 box1.SetLineColor(0)
 
-dcpz1.Draw("cont3 same")
-dcpz2.Draw("cont3 same")
+#dcpz1.Draw("cont3 same")
+#dcpz2.Draw("cont3 same")
 dcpz3.Draw("cont3 same")
 
 dcptrue = (215.*math.pi/180 - 2*math.pi)/math.pi
@@ -115,7 +114,7 @@ print dcptrue
 s1 = ROOT.TMarker(dcptrue,0.088,29)
 s1.Draw("same")
 
-t1 = ROOT.TPaveText(0.5,0.72,0.89,0.89,"NDC")
+t1 = ROOT.TPaveText(0.17,0.72,0.6,0.89,"NDC")
 t1.AddText("DUNE Sensitivity")
 t1.AddText("All Systematics")
 t1.AddText("Normal Ordering")
@@ -126,9 +125,9 @@ t1.SetBorderSize(0)
 t1.SetTextAlign(12)
 t1.Draw("same")
 
-l1 = ROOT.TLegend(0.55,0.55,0.89,0.7)
-l1.AddEntry(dcpz1,"7 years (staged)","L")
-l1.AddEntry(dcpz2,"10 years (staged)","L")
+l1 = ROOT.TLegend(0.55,0.7,0.89,0.89)
+#l1.AddEntry(dcpz1,"7 years (staged)","L")
+#l1.AddEntry(dcpz2,"10 years (staged)","L")
 l1.AddEntry(dcpz3,"15 years (staged)","L")
 l1.AddEntry(box1, "NuFIT 4.0 90% C.L.", "F")
 l1.AddEntry(s1, "True Value","P")
@@ -137,8 +136,8 @@ l1.SetFillStyle(0)
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
 
-outname = "plot_v4/bubbles/bubbles_q13_2019_v4.eps"
-outname2 = "plot_v4/bubbles/bubbles_q13_2019_v4.png"
+outname = "plot_v3/bubbles/bubbles_q13_2019_v3_15yronly.eps"
+outname2 = "plot_v3/bubbles/bubbles_q13_2019_v3_15yronly.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)
 

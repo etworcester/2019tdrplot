@@ -88,7 +88,7 @@ for myexp in explist:
             continue
 
       #Th23 lo
-      filename = "root_callum/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov1_v3.root"
+      filename = "root_v4/sens_staging/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov1_v4.root"
       f1 = ROOT.TFile(filename)
       cpvgraph_lo = f1.Get("sens_cpv_"+hier)
       nvals = cpvgraph_lo.GetN()
@@ -113,7 +113,7 @@ for myexp in explist:
       f1.Close()
 
       #Th23 Hi
-      filename = "root_callum/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov2_v3.root"
+      filename = "root_v4/sens_staging/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov2_v4.root"
       f1 = ROOT.TFile(filename)
       cpvgraph_hi = f1.Get("sens_cpv_"+hier)
       nvals = cpvgraph_hi.GetN()
@@ -135,7 +135,7 @@ for myexp in explist:
       f1.Close()
 
       #Th23 Nom
-      filename = "root_callum/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov0_v3.root"
+      filename = "root_v4/sens_staging/cpv_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov0_v4.root"
       f1 = ROOT.TFile(filename)
       cpvgraph_nom = f1.Get("sens_cpv_"+hier)
       nvals = cpvgraph_nom.GetN()
@@ -157,7 +157,7 @@ for myexp in explist:
       f1.Close()
       
       #MH Th23 lo
-      filename = "root_callum/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov1_v3.root"
+      filename = "root_v4/sens_staging/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov1_v4.root"
       f1 = ROOT.TFile(filename)
       mhgraph_lo = f1.Get("sens_mh_"+hier)
       nvals = mhgraph_lo.GetN()
@@ -177,7 +177,7 @@ for myexp in explist:
       f1.Close()
 
       #MH Th23 hi
-      filename = "root_callum/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov2_v3.root"
+      filename = "root_v4/sens_staging/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov2_v4.root"
       f1 = ROOT.TFile(filename)
       mhgraph_hi = f1.Get("sens_mh_"+hier)
       nvals = mhgraph_hi.GetN()
@@ -197,7 +197,7 @@ for myexp in explist:
       f1.Close()
 
       #MH Th23 nom
-      filename = "root_callum/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov0_v3.root"
+      filename = "root_v4/sens_staging/mh_sens_ndfd_"+str(myexp)+"kTMWyr_allsyst_th13_hie"+hnum+"_asimov0_v4.root"
       f1 = ROOT.TFile(filename)
       mhgraph_nom = f1.Get("sens_mh_"+hier)
       nvals = mhgraph_nom.GetN()
@@ -279,7 +279,7 @@ g_mhsig_best_lo.SetLineWidth(3)
 g_mhsig_best_hi.SetLineWidth(3)
 g_mhsig_best_nom.SetLineWidth(3)
 
-myout = ROOT.TFile("root/exposure_graphs_varyth23_"+hier+".root","recreate")
+myout = ROOT.TFile("root_v4/exposure_graphs_varyth23_"+hier+".root","recreate")
 g_cpvsig_75_lo.SetName("cpvsig75_q23lo")
 g_cpvsig_50_lo.SetName("cpvsig50_q23lo")
 g_cpvsig_best_lo.SetName("cpvsigbest_q23lo")
@@ -390,8 +390,8 @@ t5sig.SetFillStyle(0)
 t5sig.SetBorderSize(0)
 #t5sig.Draw("same")
 
-outname = "plot/exposures/cpv_exp_varyth23_"+hier+"_2019.eps"
-outname2 = "plot/exposures/cpv_exp_varyth23_"+hier+"_2019.png"
+outname = "plot_v4/exposures/cpv_exp_varyth23_"+hier+"_2019_v4.eps"
+outname2 = "plot_v4/exposures/cpv_exp_varyth23_"+hier+"_2019_v4.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)
 
@@ -427,8 +427,8 @@ line3.SetLineStyle(2)
 line3.SetLineWidth(3)
 line3.Draw("same")
 
-outname = "plot/exposures/mh_exp_varyth23_"+hier+"_2019.eps"
-outname2 = "plot/exposures/mh_exp_varyth23_"+hier+"_2019.png"
+outname = "plot_v4/exposures/mh_exp_varyth23_"+hier+"_2019_v4.eps"
+outname2 = "plot_v4/exposures/mh_exp_varyth23_"+hier+"_2019_v4.png"
 c2.SaveAs(outname)
 c2.SaveAs(outname2)
 

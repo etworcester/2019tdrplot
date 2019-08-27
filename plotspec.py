@@ -27,7 +27,7 @@ def geterrors(h):
         i+=1
 
     
-specfile = ROOT.TFile("root/spec_hist_v3_wt.root")
+specfile = ROOT.TFile("root_v3/spec_hist_v3_wt.root")
 
 #Appearance FHC
 h = specfile.Get("nue_fhc_nh_0pi").Rebin(2)
@@ -120,7 +120,8 @@ hs.Draw("same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_app_nu_no.eps")
+c1.SaveAs("plot_v3/spec_app_nu_no.eps")
+c1.SaveAs("plot_v3/spec_app_nu_no.png")
 
 #Appearance RHC
 h = specfile.Get("nue_rhc_nh_0pi").Rebin(2)
@@ -213,7 +214,8 @@ hs.Draw("same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_app_anu_no.eps")
+c1.SaveAs("plot_v3/spec_app_anu_no.eps")
+c1.SaveAs("plot_v3/spec_app_anu_no.png")
 
 #Disappearance FHC
 h = specfile.Get("numu_fhc_nh_0pi").Rebin(2)
@@ -297,7 +299,8 @@ h.Draw("E,same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_dis_nu_no.eps")
+c1.SaveAs("plot_v3/spec_dis_nu_no.eps")
+c1.SaveAs("plot_v3/spec_dis_nu_no.png")
 
 
 #Disappearance RHC
@@ -382,6 +385,7 @@ h.Draw("E,same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_dis_anu_no.eps")
+c1.SaveAs("plot_v3/spec_dis_anu_no.eps")
+c1.SaveAs("plot_v3/spec_dis_anu_no.png")
 
 

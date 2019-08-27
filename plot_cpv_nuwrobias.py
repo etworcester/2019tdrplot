@@ -31,25 +31,17 @@ else:
       print "Must supply nh or ih!"
       exit()
 
-f1 = ROOT.TFile("root_callum/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_v3.root")
+f1 = ROOT.TFile("root_v4/sens_staging/cpv_sens_ndfd_624kTMWyr_allsyst_th13_hie1_asimov0_v4.root")
 anom = f1.Get("sens_cpv_"+hier)
-f1a = ROOT.TFile("root_chris/cpv_res_tdr_minus1to1.root")
-idnom = f1a.Get("th13_10yr")
+f1a = ROOT.TFile("root_v4/throws/graphs_final.root")
+idnom = f1a.Get("dcp_th23upper_th13_10yr")
 
 r1s = ROOT.TGraphSmooth("normal")
 dnom = r1s.SmoothKern(idnom,"normal",0.25) 
 
-f2 = ROOT.TFile("root_callum/cpv_sens_fd_624kTMWyr_nosyst_th13_hie1_asimov0_v3.root")
-anosyst = f2.Get("sens_cpv_"+hier)
-
-
-f3 = ROOT.TFile("root_chris/nuwro_bias_fdOnly.root")
+f3 = ROOT.TFile("root_chris_v3/nuwro_bias_fdOnly.root")
 afdonly = f3.Get("cpv_NuWroBias_68pct")
 idfdonly = f3.Get("dcp_NuWroBias_68pct")
-idnosyst = f3.Get("dcp_nosyst")
-
-r2s = ROOT.TGraphSmooth("normal")
-dnosyst = r2s.SmoothKern(idnosyst,"normal",0.25) 
 
 r3s = ROOT.TGraphSmooth("normal")
 dfdonly = r3s.SmoothKern(idfdonly,"normal",0.25) 
@@ -59,13 +51,6 @@ anom.SetLineWidth(4)
 anom.SetLineColor(ROOT.kOrange-3)
 dnom.SetLineWidth(4)
 dnom.SetLineColor(ROOT.kOrange-3)
-
-anosyst.SetLineWidth(4)
-anosyst.SetLineColor(ROOT.kOrange-3)
-anosyst.SetLineStyle(2)
-dnosyst.SetLineWidth(4)
-dnosyst.SetLineColor(ROOT.kOrange-3)
-dnosyst.SetLineStyle(2)
 
 afdonly.SetLineWidth(4)
 afdonly.SetLineColor(ROOT.kOrange+3)
@@ -85,7 +70,6 @@ h1.GetYaxis().SetTitleOffset(1.3)
 h1.GetYaxis().CenterTitle()
 c1.Modified()
 anom.Draw("same")
-#anosyst.Draw("same")
 afdonly.Draw("same")
 ROOT.gPad.RedrawAxis()
 
@@ -108,7 +92,6 @@ null = ROOT.TObject()
 l1 = ROOT.TLegend(0.52,0.68,0.89,0.89)
 l1.AddEntry(anom,"Nominal Sensitivity:", "L")
 l1.AddEntry(null,"All Systematics, No Bias","")
-#l1.AddEntry(anosyst,"No systematics, No Bias", "L")
 l1.AddEntry(afdonly,"FD Only Example:","L")
 l1.AddEntry(null,"All Systematics,","")
 l1.AddEntry(null,"NuWro Bias Applied","")
@@ -139,8 +122,10 @@ t5sig.SetBorderSize(0)
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname = "plot/cpv/cpv_nuwrobias_2019.png"
-c1.SaveAs(outname)
+outname1 = "plot_v4/cpv/cpv_nuwrobias_2019_v4.png"
+outname2 = "plot_v4/cpv/cpv_nuwrobias_2019_v4.eps"
+c1.SaveAs(outname1)
+c1.SaveAs(outname2)
 
 c2 = ROOT.TCanvas("c2","c2",800,800)
 c2.SetLeftMargin(0.15)
@@ -159,5 +144,7 @@ ROOT.gPad.RedrawAxis()
 
 t1.Draw("same")
 l1.Draw("same")
-outname = "plot/res/dcpres_nuwrobias_2019.png"
-c2.SaveAs(outname)
+outname1 = "plot_v4/res/dcpres_nuwrobias_2019_v4.png"
+outname2 = "plot_v4/res/dcpres_nuwrobias_2019_v4.eps"
+c2.SaveAs(outname1)
+c2.SaveAs(outname2)
