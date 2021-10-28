@@ -37,7 +37,7 @@ def filldiff(up,down):
       return diffgraph;
 
 def grange(g_in,ilo1,ihi1,ilo2,ihi2):
-      print(g_in, ilo1, ihi1, ilo2, ihi2)
+      #print(g_in, ilo1, ihi1, ilo2, ihi2)
       n = g_in.GetN()
       g_out = ROOT.TGraph(ihi1-ilo1 + ihi2-ilo2);
       i = 0
@@ -48,14 +48,14 @@ def grange(g_in,ilo1,ihi1,ilo2,ihi2):
       while (i+start)<ihi1:
           g_in.GetPoint(i+start,x,y)
           g_out.SetPoint(i,x,y)
-          print(i, i+start, x, y)
+          #print(i, i+start, x, y)
           i += 1
       start = ilo2
       j = 0
       while (j+start)<ihi2:
             g_in.GetPoint(j+start,x,y)
             g_out.SetPoint(i,x,y)
-            print(i, j+start, x, y)
+            #print(i, j+start, x, y)
             i += 1
             j+=1
       return g_out;
