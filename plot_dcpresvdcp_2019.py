@@ -4,6 +4,7 @@ import sys
 import math
 import ROOT
 from array import array
+import ctypes
 
 ROOT.gROOT.SetStyle("Plain")
 ROOT.gStyle.SetOptStat(0)
@@ -23,10 +24,10 @@ def filldiff(up,down):
       n = up.GetN()
       diffgraph = ROOT.TGraph(2*n);
       i = 0
-      xup = ROOT.Double(-9.9)
-      yup = ROOT.Double(-9.9)
-      xlo = ROOT.Double(-9.9)
-      ylo = ROOT.Double(-9.9)
+      xup = ctypes.c_double(-9.9) #ROOT.Double(-9.9)
+      yup = ctypes.c_double(-9.9) #ROOT.Double(-9.9)
+      xlo = ctypes.c_double(-9.9) #ROOT.Double(-9.9)
+      ylo = ctypes.c_double(-9.9) #ROOT.Double(-9.9)
       while i<n:
           up.GetPoint(i,xup,yup);
           down.GetPoint(n-i-1,xlo,ylo);
@@ -59,12 +60,12 @@ r3s_nopen =ROOT.TGraphSmooth("normal")
 r3nopen = r3s_nopen.SmoothKern(g3nopen,"normal",0.25)
 
 
-r1.SetLineWidth(3)
-r2.SetLineWidth(3)
-r3.SetLineWidth(3)
-r1nopen.SetLineWidth(3)
-r2nopen.SetLineWidth(3)
-r3nopen.SetLineWidth(3)
+r1.SetLineWidth(5)
+r2.SetLineWidth(5)
+r3.SetLineWidth(5)
+r1nopen.SetLineWidth(5)
+r2nopen.SetLineWidth(5)
+r3nopen.SetLineWidth(5)
 
 r1nopen.SetLineStyle(2)
 r2nopen.SetLineStyle(2)
@@ -122,9 +123,12 @@ t1.SetTextAlign(12)
 t1.Draw("same")
 
 l1 = ROOT.TLegend(0.6,0.73,0.89,0.89)
-l1.AddEntry(graph_range1,"7 years (staged)","F")
-l1.AddEntry(graph_range2,"10 years (staged)","F")
-l1.AddEntry(graph_range3,"15 years (staged)","F")
+#l1.AddEntry(graph_range1,"7 years (staged)","F")
+#l1.AddEntry(graph_range2,"10 years (staged)","F")
+#l1.AddEntry(graph_range3,"15 years (staged)","F")
+l1.AddEntry(graph_range1,"336 kt-MW-years", "F")
+l1.AddEntry(graph_range2,"624 kt-MW-years", "F")
+l1.AddEntry(graph_range3,"1104 kt-MW-years", "F")
 l1.AddEntry(r1,"Nominal Analysis","L")
 l1.AddEntry(r1nopen,"#theta_{13} unconstrained","L")
 l1.SetBorderSize(0)
@@ -132,8 +136,8 @@ l1.SetFillStyle(0)
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
 
-outname = "plot_v4/res/dcpresvdcp_smooth_v4.eps"
-outname2 = "plot_v4/res/dcpresvdcp_smooth_v4.png"
+outname = "plot_v4/res/dcpresvdcp_smooth_v4_exp.eps"
+outname2 = "plot_v4/res/dcpresvdcp_smooth_v4_exp.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)
 

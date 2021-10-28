@@ -29,7 +29,7 @@ f3 = ROOT.TFile("root_callum/asimov_deltapi-ssth23_ndfd15year_allsyst_th13_asimo
 hist3 = f3.Get("deltapi_ssth23")
 
 
-nufit = ROOT.TFile("root/nufit_dcpvq23_contours_rotate.root")
+nufit = ROOT.TFile("root_v3/nufit_dcpvq23_contours_rotate.root")
 h_no = nufit.Get("h_no")
 
 c1 = ROOT.TCanvas("c1","c1",800,800)

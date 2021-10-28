@@ -27,7 +27,7 @@ def geterrors(h):
         i+=1
 
     
-specfile = ROOT.TFile("root/spec_hist_v3_wt.root")
+specfile = ROOT.TFile("root_v4/spec_hist_v4_wt.root")
 
 h = specfile.Get("nue_fhc_nh_0pi").Rebin(2)
 h_dcppos = specfile.Get("nue_fhc_nh_piover2").Rebin(2)
@@ -75,12 +75,12 @@ hs.Add(h_NC,"HIST")
 hs.Add(h_numu,"HIST")
 hs.Add(h_nutau,"HIST")
 
-nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(7.99))
-nnumu = h_numu.Integral(h_numu.FindBin(0.51),h_numu.FindBin(7.99))
-nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(7.99))
-nbeamnue = h_beamnue.Integral(h_beamnue.FindBin(0.51),h_beamnue.FindBin(7.99))
-nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
-nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(7.99)) - nNC - nnumu - nnutau - nbeamnue
+nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(9.99))
+nnumu = h_numu.Integral(h_numu.FindBin(0.51),h_numu.FindBin(9.99))
+nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(9.99))
+nbeamnue = h_beamnue.Integral(h_beamnue.FindBin(0.51),h_beamnue.FindBin(9.99))
+nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
+nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(9.99)) - nNC - nnumu - nnutau - nbeamnue
 
 print "Signal: ", nsig, nsig2
 print "NC: ", nNC
@@ -130,7 +130,8 @@ t1.Draw("same")
 l1.Draw("same")
 l2.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_app_nu_varydcp.eps")
+c1.SaveAs("plot_v4/spec_app_nu_v4_varydcp.eps")
+c1.SaveAs("plot_v4/spec_app_nu_v4_varydcp.png")
 
 #Anti-nu
 h = specfile.Get("nue_rhc_nh_0pi").Rebin(2)
@@ -220,7 +221,7 @@ l2.SetBorderSize(0)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
-h1 = c1.DrawFrame(0.5,0.,8.,75.)
+h1 = c1.DrawFrame(0.5,0.,8.,50.)
 h1.GetXaxis().SetTitle("Reconstructed Energy (GeV)")
 h1.GetYaxis().SetTitle("Events per 0.25 GeV")
 h1.GetYaxis().SetTitleOffset(1.5)
@@ -234,5 +235,6 @@ t1.Draw("same")
 l1.Draw("same")
 l2.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot/spec_app_anu_varydcp.eps")
+c1.SaveAs("plot_v4/spec_app_anu_v4_varydcp.eps")
+c1.SaveAs("plot_v4/spec_app_anu_v4_varydcp.png")
 

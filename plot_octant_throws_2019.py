@@ -33,6 +33,10 @@ graph_7yr = f1.Get("octant_1sigma_th13_7yr")
 graph_10yr = f1.Get("octant_1sigma_th13_10yr")
 graph_15yr = f1.Get("octant_1sigma_th13_15yr")
 
+graph_7yr_ih = f1.Get("octant_1sigma_th13_7yr_IH")
+graph_10yr_ih = f1.Get("octant_1sigma_th13_10yr_IH")
+graph_15yr_ih = f1.Get("octant_1sigma_th13_15yr_IH")
+
 c3 = ROOT.TCanvas("c3","c3",800,800)
 h3 = c3.DrawFrame(0.41, 0.0, 0.59, 10.0)
 h3.SetTitle("")
@@ -97,6 +101,46 @@ ROOT.gPad.RedrawAxis()
 
 c3.SaveAs("plot_v4/octant/octant_no_2019_v4.png")
 c3.SaveAs("plot_v4/octant/octant_no_2019_v4.eps")
+
+c4 = ROOT.TCanvas("c4","c4",800,800)
+h4 = c4.DrawFrame(0.41, 0.0, 0.59, 10.0)
+h4.SetTitle("")
+h4.GetXaxis().SetTitle("sin^{2}#theta_{23}")
+#h3.GetYaxis().SetTitleOffset(1.)
+h4.GetXaxis().SetTitleOffset(1.15)
+h4.GetYaxis().CenterTitle()
+h4.GetYaxis().SetTitle("#sigma = #sqrt{#bar{#Delta#chi^{2}}}")
+
+graph_7yr_ih.SetFillColorAlpha(ROOT.kBlue-7,0.5)
+graph_7yr_ih.SetLineColor(ROOT.kBlue-7)
+#graph_7yr_ih.Draw("l e3 same")
+
+graph_10yr_ih.SetFillColorAlpha(ROOT.kOrange-3,0.5)
+graph_10yr_ih.SetLineColor(ROOT.kOrange-3)
+graph_10yr_ih.Draw("l e3 same")
+
+graph_15yr_ih.SetFillColorAlpha(ROOT.kGreen-7,0.5)
+graph_15yr_ih.SetLineColor(ROOT.kGreen-7)
+graph_15yr_ih.Draw("l e3 same")
+
+t1 = ROOT.TPaveText(0.22,0.75,0.5,0.89,"NDC")
+t1.AddText("DUNE Sensitivity")
+t1.AddText("All Systematics")
+t1.AddText("Inverted Ordering")
+t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+t1.SetFillColor(0)
+t1.SetBorderSize(0)
+t1.SetTextAlign(12)
+t1.Draw("same")
+
+leg1.Draw()
+l1.Draw()
+l2.Draw()
+
+ROOT.gPad.RedrawAxis()
+
+c4.SaveAs("plot_v4/octant/octant_io_2019_v4.png")
+c4.SaveAs("plot_v4/octant/octant_io_2019_v4.eps")
 
 
 

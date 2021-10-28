@@ -75,7 +75,7 @@ t1.AddText("DUNE Sensitivity")
 t1.AddText("All Systematics")
 t1.AddText("Normal Ordering")
 t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
-t1.AddText("10 years (staged)")
+t1.AddText("624 kt-MW-years")
 t1.SetFillColor(0)
 t1.SetBorderSize(0)
 t1.SetTextAlign(12)
@@ -93,8 +93,8 @@ l2.Draw()
 
 ROOT.gPad.RedrawAxis()
 
-c3.SaveAs("plot_v4/octant/octant_no_2019_10yronly_v4.png")
-c3.SaveAs("plot_v4/octant/octant_no_2019_10yronly_v4.eps")
+c3.SaveAs("plot_v4/octant/octant_no_2019_10yronly_v4_exp.png")
+c3.SaveAs("plot_v4/octant/octant_no_2019_10yronly_v4_exp.eps")
 
 
 

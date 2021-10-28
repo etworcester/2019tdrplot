@@ -27,7 +27,7 @@ def geterrors(h):
         i+=1
 
     
-specfile = ROOT.TFile("root_v3/spec_hist_v3_wt.root")
+specfile = ROOT.TFile("root_v4/spec_hist_v4_wt.root")
 
 #Disappearance FHC
 h = specfile.Get("numu_fhc_nh_0pi").Rebin(2)
@@ -117,8 +117,8 @@ h.Draw("HIST,same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot_v3/spec_dis_nu_no_unosc.eps")
-c1.SaveAs("plot_v3/spec_dis_nu_no_unosc.png")
+c1.SaveAs("plot_v4/spec_dis_nu_no_unosc.eps")
+c1.SaveAs("plot_v4/spec_dis_nu_no_unosc.png")
 
 
 # #Disappearance RHC

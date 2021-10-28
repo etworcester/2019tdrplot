@@ -28,22 +28,26 @@ elif (hier == 'ih'):
       htext = "Inverted Ordering"
       hiestr = "hie-1"
 else:
-      print("Must supply nh or ih!")
+      print "Must supply nh or ih!"
       exit()
 
-f1text = "root_v4/throws/graphs_final.root"
-f1 = ROOT.TFile(f1text)
-if (hier == 'nh'):
-      cpv1 = f1.Get("cpv_th23all1sigma_th13_7yr")
-      cpv2 = f1.Get("cpv_th23all1sigma_th13_10yr")
-      cpv3 = f1.Get("mh_th23all1sigma_th13_7yr")
-      cpv4 = f1.Get("mh_th23all1sigma_th13_10yr")
-elif (hier == 'ih'):
-      cpv1 = f1.Get("cpv_th23all1sigma_th13_7yr_IH")
-      cpv2 = f1.Get("cpv_th23all1sigma_th13_10yr_IH")
-      cpv3 = f1.Get("mh_th23all1sigma_th13_7yr_IH")
-      cpv4 = f1.Get("mh_th23all1sigma_th13_10yr_IH")
 
+f1text = "root_v4_lowexposure/CAFAna_throws_ndfd_66ktMWyr_NH_th13_BAND.root"
+f1 = ROOT.TFile(f1text)
+f2text = "root_v4_lowexposure/CAFAna_throws_ndfd_100ktMWyr_NH_th13_BAND.root"
+f2 = ROOT.TFile(f2text)
+if (hier == 'ih'):
+      f1text = "root_v4_lowexposure/CAFAna_throws_ndfd_66ktMWyr_IH_th13_BAND.root"
+      f1 = ROOT.TFile(f1text)
+      f2text = "root_v4_lowexposure/CAFAna_throws_ndfd_100ktMWyr_IH_th13_BAND.root"
+      f2 = ROOT.TFile(f2text)
+
+
+cpv1 = f1.Get("cpv_throws_1sigma")
+cpv2 = f2.Get("cpv_throws_1sigma")
+cpv3 = f1.Get("mh_throws_1sigma")
+cpv4 = f2.Get("mh_throws_1sigma")
+      
 cpv1.SetLineWidth(4)
 cpv1.SetLineColor(ROOT.kBlue-7)
 cpv2.SetLineWidth(4)
@@ -68,11 +72,11 @@ cpv4.SetFillColorAlpha(ROOT.kOrange-3,0.5)
 
 c1 = ROOT.TCanvas("c1","c1",800,800)
 c1.SetLeftMargin(0.15)
-h1 = c1.DrawFrame(-1.0,0.0,1.0,13.0)
+h1 = c1.DrawFrame(-1.0,0.0,1.0,6.0)
 h1.SetTitle("CP Violation Sensitivity")
 h1.GetXaxis().SetTitle("#delta_{CP}/#pi")
 h1.GetXaxis().CenterTitle()
-h1.GetYaxis().SetTitle("#sigma = #sqrt{#Delta#chi^{2}}")
+h1.GetYaxis().SetTitle("#sqrt{#Delta#chi^{2}_{#lower[-0.3]{#scale[0.7]{CPV}}}}")
 h1.GetYaxis().SetTitleOffset(1.3)
 h1.GetYaxis().CenterTitle()
 c1.Modified()
@@ -99,8 +103,8 @@ cpv_dum.SetLineColor(ROOT.kBlack)
 null = ROOT.TObject()
 
 l1 = ROOT.TLegend(0.52,0.68,0.89,0.89)
-l1.AddEntry(cpv1,"336 kt-MW-years", "L")
-l1.AddEntry(cpv2,"624 kt-MW-years", "L")
+l1.AddEntry(cpv1,"66 kt-MW-years", "L")
+l1.AddEntry(cpv2,"100 kt-MW-years", "L")
 l1.AddEntry(cpv_dum,"Median of Throws","L")
 l1.AddEntry(band_dum, "1#sigma: Variations of","F")
 l1.AddEntry(null,"statistics, systematics,","")
@@ -116,7 +120,7 @@ line1.Draw("same")
 line2 = ROOT.TLine(-1.0,5.,1.0,5.)
 line2.SetLineStyle(2)
 line2.SetLineWidth(3)
-line2.Draw("same")
+#line2.Draw("same")
 
 t3sig = ROOT.TPaveText(-0.05,3.1,0.05,3.5)
 t3sig.AddText("3#sigma")
@@ -132,18 +136,18 @@ t5sig.SetBorderSize(0)
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname1 = "plot_v4/cpv/cpv_two_exps_throws_"+hier+"_2019_v4_exp.png"
-outname2 = "plot_v4/cpv/cpv_two_exps_throws_"+hier+"_2019_v4_exp.eps"
+outname1 = "plot_v4/cpv/cpv_two_exps_throws_"+hier+"_2019_v4_lowexp.png"
+outname2 = "plot_v4/cpv/cpv_two_exps_throws_"+hier+"_2019_v4_lowexp.eps"
 c1.SaveAs(outname1)
 c1.SaveAs(outname2)
 
 c2 = ROOT.TCanvas("c2","c2",800,800)
 c2.SetLeftMargin(0.15)
-h2 = c2.DrawFrame(-1.0,0.0,1.0,40.0)
+h2 = c2.DrawFrame(-1.0,0.0,1.0,20.0)
 h2.SetTitle("Mass Ordering Sensitivity")
 h2.GetXaxis().SetTitle("#delta_{CP}/#pi")
 h2.GetXaxis().CenterTitle()
-h2.GetYaxis().SetTitle("#sqrt{#Delta#chi^{2}}")
+h2.GetYaxis().SetTitle("#sqrt{#Delta#chi^{2}_{#lower[-0.3]{#scale[0.7]{MO}}}}")
 h2.GetYaxis().SetTitleOffset(1.3)
 h2.GetYaxis().CenterTitle()
 c2.Modified()
@@ -170,8 +174,8 @@ line2.Draw("same")
 
 l1.SetFillColor(0)
 l1.Draw("same")
-outname1 = "plot_v4/mh/mh_two_exps_throws_"+hier+"_2019_v4_exp.png"
-outname2 = "plot_v4/mh/mh_two_exps_throws_"+hier+"_2019_v4_exp.eps"
+outname1 = "plot_v4/mh/mh_two_exps_throws_"+hier+"_2019_v4_lowexp.png"
+outname2 = "plot_v4/mh/mh_two_exps_throws_"+hier+"_2019_v4_lowexp.eps"
 c2.SaveAs(outname1)
 c2.SaveAs(outname2)
 

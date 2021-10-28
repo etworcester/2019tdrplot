@@ -50,6 +50,8 @@ for myfile in filelist:
             myth13val = math.sin(2*math.asin(math.sqrt(th13val)))*math.sin(2*math.asin(math.sqrt(th13val)))
         elif (job == 2):
             myth13val = th13val
+        elif (job == 3):
+            mydmsqval = math.pow(10,dcpval) / 0.001
         else:
             myth13val = 99999.9
         s22th13.append(myth13val)

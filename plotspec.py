@@ -27,7 +27,7 @@ def geterrors(h):
         i+=1
 
     
-specfile = ROOT.TFile("root_v3/spec_hist_v3_wt.root")
+specfile = ROOT.TFile("root_v4/spec_hist_v4_wt.root")
 
 #Appearance FHC
 h = specfile.Get("nue_fhc_nh_0pi").Rebin(2)
@@ -69,14 +69,14 @@ hs.Add(h_NC,"HIST")
 hs.Add(h_numu,"HIST")
 hs.Add(h_nutau,"HIST")
 
-nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(7.99))
-nnumu = h_numu.Integral(h_numu.FindBin(0.51),h_numu.FindBin(7.99))
-nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(7.99))
-nbeamnue = h_beamnue.Integral(h_beamnue.FindBin(0.51),h_beamnue.FindBin(7.99))
-nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
-nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(7.99)) - nNC - nnumu - nnutau - nbeamnue
-nsig_nu = h_sig_nu.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
-nsig_anu = h_sig_anu.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
+nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(9.99))
+nnumu = h_numu.Integral(h_numu.FindBin(0.51),h_numu.FindBin(9.99))
+nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(9.99))
+nbeamnue = h_beamnue.Integral(h_beamnue.FindBin(0.51),h_beamnue.FindBin(9.99))
+nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
+nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(9.99)) - nNC - nnumu - nnutau - nbeamnue
+nsig_nu = h_sig_nu.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
+nsig_anu = h_sig_anu.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
 ntot = h.Integral()
 
 print "Signal: ", nsig, nsig2
@@ -120,8 +120,8 @@ hs.Draw("same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot_v3/spec_app_nu_no.eps")
-c1.SaveAs("plot_v3/spec_app_nu_no.png")
+c1.SaveAs("plot_v4/spec_app_nu_no_v4.eps")
+c1.SaveAs("plot_v4/spec_app_nu_no_v4.png")
 
 #Appearance RHC
 h = specfile.Get("nue_rhc_nh_0pi").Rebin(2)
@@ -163,14 +163,14 @@ hs.Add(h_NC,"HIST")
 hs.Add(h_numu,"HIST")
 hs.Add(h_nutau,"HIST")
 
-nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(7.99))
-nnumu = h_numu.Integral(h_numu.FindBin(0.51),h_numu.FindBin(7.99))
-nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(7.99))
-nbeamnue = h_beamnue.Integral(h_beamnue.FindBin(0.51),h_beamnue.FindBin(7.99))
-nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
-nsig_nu = h_sig_nu.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
-nsig_anu = h_sig_anu.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
-nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(7.99)) - nNC - nnumu - nnutau - nbeamnue
+nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(9.99))
+nnumu = h_numu.Integral(h_numu.FindBin(0.51),h_numu.FindBin(9.99))
+nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(9.99))
+nbeamnue = h_beamnue.Integral(h_beamnue.FindBin(0.51),h_beamnue.FindBin(9.99))
+nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
+nsig_nu = h_sig_nu.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
+nsig_anu = h_sig_anu.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
+nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(9.99)) - nNC - nnumu - nnutau - nbeamnue
 ntot = h.Integral()
 
 print "Signal: ", nsig, nsig2
@@ -214,8 +214,8 @@ hs.Draw("same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot_v3/spec_app_anu_no.eps")
-c1.SaveAs("plot_v3/spec_app_anu_no.png")
+c1.SaveAs("plot_v4/spec_app_anu_no_v4.eps")
+c1.SaveAs("plot_v4/spec_app_anu_no_v4.png")
 
 #Disappearance FHC
 h = specfile.Get("numu_fhc_nh_0pi").Rebin(2)
@@ -254,12 +254,12 @@ hs.Add(h_nue,"HIST")
 hs.Add(h_NC,"HIST")
 hs.Add(h_ws,"HIST")
 
-nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(7.99))
-nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(7.99))
-nws = h_ws.Integral(h_ws.FindBin(0.51),h_ws.FindBin(7.99))
-nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
-nnue = h_nue.Integral(h_nue.FindBin(0.51),h_nue.FindBin(7.99))
-nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(7.99)) - nNC - nnutau - nws -nnue
+nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(9.99))
+nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(9.99))
+nws = h_ws.Integral(h_ws.FindBin(0.51),h_ws.FindBin(9.99))
+nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
+nnue = h_nue.Integral(h_nue.FindBin(0.51),h_nue.FindBin(9.99))
+nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(9.99)) - nNC - nnutau - nws -nnue
 
 print "Signal: ", nsig, nsig2
 print "NC: ", nNC
@@ -299,8 +299,8 @@ h.Draw("E,same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot_v3/spec_dis_nu_no.eps")
-c1.SaveAs("plot_v3/spec_dis_nu_no.png")
+c1.SaveAs("plot_v4/spec_dis_nu_no_v4.eps")
+c1.SaveAs("plot_v4/spec_dis_nu_no_v4.png")
 
 
 #Disappearance RHC
@@ -340,12 +340,12 @@ hs.Add(h_nue,"HIST")
 hs.Add(h_NC,"HIST")
 hs.Add(h_ws,"HIST")
 
-nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(7.99))
-nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(7.99))
-nws = h_ws.Integral(h_ws.FindBin(0.51),h_ws.FindBin(7.99))
-nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(7.99))
-nnue = h_nue.Integral(h_nue.FindBin(0.51),h_nue.FindBin(7.99))
-nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(7.99)) - nNC - nnutau - nws -nnue
+nNC = h_NC.Integral(h_NC.FindBin(0.51),h_NC.FindBin(9.99))
+nnutau = h_nutau.Integral(h_nutau.FindBin(0.51),h_nutau.FindBin(9.99))
+nws = h_ws.Integral(h_ws.FindBin(0.51),h_ws.FindBin(9.99))
+nsig = h_sig.Integral(h_sig.FindBin(0.51),h_sig.FindBin(9.99))
+nnue = h_nue.Integral(h_nue.FindBin(0.51),h_nue.FindBin(9.99))
+nsig2 = h.Integral(h.FindBin(0.51),h.FindBin(9.99)) - nNC - nnutau - nws -nnue
 
 print "Signal: ", nsig, nsig2
 print "NC: ", nNC
@@ -385,7 +385,7 @@ h.Draw("E,same")
 t1.Draw("same")
 l1.Draw("same")
 ROOT.gPad.RedrawAxis()
-c1.SaveAs("plot_v3/spec_dis_anu_no.eps")
-c1.SaveAs("plot_v3/spec_dis_anu_no.png")
+c1.SaveAs("plot_v4/spec_dis_anu_no_v4.eps")
+c1.SaveAs("plot_v4/spec_dis_anu_no_v4.png")
 
 

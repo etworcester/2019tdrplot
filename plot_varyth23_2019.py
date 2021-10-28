@@ -197,6 +197,7 @@ ROOT.gPad.RedrawAxis()
 t1.Draw("same")
 
 l1.Draw("same")
+line2.Draw("same")
 outname = "plot_v4/vary_params/mh_varyth23_2019_v4.eps"
 outname2 = "plot_v4/vary_params/mh_varyth23_2019_v4.png"
 c2.SaveAs(outname)

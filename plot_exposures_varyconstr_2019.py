@@ -398,6 +398,47 @@ outname2 = "plot_v4/exposures/cpv_exp_varyconstr_"+hier+"_2019_v4.png"
 c1.SaveAs(outname)
 c1.SaveAs(outname2)
 
+c1a = ROOT.TCanvas("c1a","c1a",800,800)
+c1a.SetLeftMargin(0.15)
+h1a = c1.DrawFrame(0,0.0,1000.0,12.0)
+h1a.SetTitle("CP Violation Sensitivity")
+h1a.GetXaxis().SetTitle("Exposure (kt-MW-years)")
+h1a.GetYaxis().SetTitle("#sigma = #sqrt{#bar{#Delta#chi^{2}}}")
+h1a.GetYaxis().SetTitleOffset(1.3)
+h1a.GetYaxis().CenterTitle()
+c1a.Modified()
+
+graph_cpvbestrange.SetFillColor(ROOT.kPink-3)
+graph_cpvbestrange.SetLineColor(0)
+graph_cpvbestrange.Draw("F same")
+g_cpvsig_best_lo.Draw("L same")
+g_cpvsig_best_hi.Draw("L same")
+
+t1.Draw("same")
+
+l1 = ROOT.TLegend(0.55,0.75,0.89,0.89)
+l1.AddEntry(graph_cpvbestrange, "#delta_{CP} = -#pi/2","F")
+l1.AddEntry(g_cpvsig_75_hi,"Nominal Analysis","L")
+l1.AddEntry(g_cpvsig_75_lo,"#theta_{13} unconstrained","L")
+l1.SetBorderSize(0)
+l1.SetFillStyle(0)
+l1.Draw("same")
+
+line1 = ROOT.TLine(0.,3.,1000.,3.)
+line1.SetLineStyle(2)
+line1.SetLineWidth(3)
+line1.Draw("same")
+
+line2 = ROOT.TLine(0.0,5.,1000.,5.)
+line2.SetLineStyle(2)
+line2.SetLineWidth(3)
+line2.Draw("same")
+
+outname = "plot_v4/exposures/cpv_exp_varyconstr_"+hier+"_2019_v4_maxcpv.eps"
+outname2 = "plot_v4/exposures/cpv_exp_varyconstr_"+hier+"_2019_v4_maxcpv.png"
+c1a.SaveAs(outname)
+c1a.SaveAs(outname2)
+
 c2 = ROOT.TCanvas("c2","c2",800,800)
 c2.SetLeftMargin(0.15)
 h2 = c2.DrawFrame(0,0.0,500.,35.)
