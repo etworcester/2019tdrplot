@@ -4,6 +4,7 @@ import sys
 import math
 import ctypes
 import ROOT
+ROOT.gROOT.SetBatch(1)
 from array import array
 
 ROOT.gROOT.SetStyle("Plain")
@@ -454,4 +455,143 @@ line2.Draw("same")
 
 outname = "plot_v4/exposures/cpv_exp_3era_r3.pdf"
 c4.SaveAs(outname)
+
+
+#######################################################################################################
+# Chris's three-panel plot
+#######################################################################################################
+
+c5 = ROOT.TCanvas("c5", "c5", 800, 1000)
+
+line1 = ROOT.TLine(0.,3.,336.,3.)
+line1.SetLineStyle(2)
+line1.SetLineWidth(3)
+
+line2 = ROOT.TLine(0.0,5.,336.,5.)
+line2.SetLineStyle(2)
+line2.SetLineWidth(3)
+
+c5.SetRightMargin(0.05)
+c5.SetLeftMargin(0.15)
+c5.Divide(1,3,0.,0.)
+c5.cd(1)
+ROOT.gPad.SetBottomMargin(0.0001)
+ROOT.gPad.SetTopMargin(0.10)
+h1 = ROOT.gPad.DrawFrame(0.,0.01,336.,7.)
+h1.GetYaxis().SetLabelSize(0.07)
+g_mh.Draw("Fsame")
+mh_nom.Draw("Lsame")
+mh_nospect.Draw("Lsame")
+line1.Draw("same")
+line2.Draw("same")
+
+# Boxes that shade out the non-interesting time periods
+box1 = ROOT.TBox( 100., 0.1, 336., 7. )
+box1.SetFillColorAlpha(19, 0.6)
+box1.Draw()
+
+# Arrows that show the delay in milestones
+#arrowMH3 = ROOT.TArrow(22., 0.4, 34., 0.4, 0.01, "|>")
+#arrowMH3.SetLineColor(ROOT.kMagenta-3)
+#arrowMH3.SetFillColor(ROOT.kMagenta-3)
+#arrowMH3.SetLineWidth(2)
+#arrowMH3.SetLineStyle(3)
+#arrowMH3.Draw()
+
+#arrowMH5 = ROOT.TArrow(66., 0.4, 87., 0.4, 0.01, "|>")
+#arrowMH5.SetLineColor(ROOT.kMagenta-3)
+#arrowMH5.SetFillColor(ROOT.kMagenta-3)
+#arrowMH5.SetLineWidth(2)
+#arrowMH5.SetLineStyle(3)
+#arrowMH5.Draw()
+
+c5.cd(2)
+ROOT.gPad.SetBottomMargin(0.0001)
+ROOT.gPad.SetTopMargin(0.0001)
+h2 = ROOT.gPad.DrawFrame(0.,0.01,336.,4.99)
+h2.GetYaxis().SetTitle("#sqrt{#bar{#Delta#chi^{2}}}")
+h2.GetYaxis().SetTitleSize(0.10)
+h2.GetYaxis().SetLabelSize(0.07)
+h2.GetYaxis().SetTitleOffset(0.6)
+h2.GetYaxis().CenterTitle()
+g_cpv_dcpmax.Draw("Fsame")
+cpv_dcpmax_nom.Draw("Lsame")
+cpv_dcpmax_nospect.Draw("Lsame")
+cpv_dcpmax_LArND.Draw("Lsame")
+line1.Draw("same")
+
+#arrowMax3 = ROOT.TArrow(100., 0.6, 116., 0.6, 0.01, "|>")
+#arrowMax3.SetLineColor(ROOT.kCyan-3)
+#arrowMax3.SetFillColor(ROOT.kCyan-3)
+#arrowMax3.SetLineWidth(2)
+#arrowMax3.SetLineStyle(2)
+#arrowMax3.Draw()
+
+#arrowMax3n = ROOT.TArrow(116., 0.4, 300., 0.4, 0.01, "|>")
+#arrowMax3n.SetLineColor(ROOT.kCyan-3)
+#arrowMax3n.SetFillColor(ROOT.kCyan-3)
+#arrowMax3n.SetLineWidth(2)
+#arrowMax3n.SetLineStyle(3)
+#arrowMax3n.Draw()
+
+box2l = ROOT.TBox( 0., 0.1, 80., 4.99 )
+box2l.SetFillColorAlpha(19, 0.6)
+box2l.Draw()
+box2r = ROOT.TBox( 200., 0.1, 336., 4.99 )
+box2r.SetFillColorAlpha(19, 0.6)
+box2r.Draw()
+
+
+c5.cd(3)
+ROOT.gPad.SetBottomMargin(0.20)
+ROOT.gPad.SetTopMargin(0.0001)
+h3 = ROOT.gPad.DrawFrame(0.,0.,336.,3.99)
+h3.GetXaxis().SetTitle("Exposure (kt-MW-years)")
+h3.GetXaxis().SetTitleSize(0.10)
+h3.GetXaxis().SetLabelSize(0.07)
+h3.GetYaxis().SetLabelSize(0.07)
+h3.GetXaxis().SetTitleOffset(0.8)
+h3.GetXaxis().CenterTitle()
+g_cpv_dcp50pct.Draw("Fsame")
+cpv_dcp50pct_nom.Draw("Lsame")
+cpv_dcp50pct_nospect.Draw("Lsame")
+cpv_dcp50pct_LArND.Draw("Lsame")
+line1.Draw("same")
+
+#arrow50 = ROOT.TArrow(210., 0.6, 334., 0.6, 0.01, "|>")
+#arrow50.SetLineColor(ROOT.kGreen-3)
+#arrow50.SetFillColor(ROOT.kGreen-3)
+#arrow50.SetLineWidth(2)
+#arrow50.SetLineStyle(2)
+#arrow50.Draw()
+
+box3 = ROOT.TBox( 0., 0.1, 180., 3.99 )
+box3.SetFillColorAlpha(19,0.6)
+box3.Draw()
+
+c5.cd(0)
+t1 = ROOT.TPaveText(0.6,0.83,0.94,0.92,"NDC")
+t1.AddText("DUNE Sensitivity")
+t1.AddText("Normal Ordering")
+t1.AddText("sin^{2}2#theta_{13} = 0.088 #pm 0.003")
+t1.AddText("sin^{2}#theta_{23} = 0.580 unconstrained")
+t1.SetFillColor(0)
+t1.SetBorderSize(0)
+t1.SetTextAlign(12)
+t1.Draw("same")
+
+l1 = ROOT.TLegend(0.5,0.66,0.94,0.82)
+l1.AddEntry(g_mh,"Mass Ordering (100% of #delta_{CP} values)","F")
+l1.AddEntry(g_cpv_dcpmax,"CP Violation (#delta_{CP} = -#pi/2)","F")
+l1.AddEntry(g_cpv_dcp50pct,"CP Violation (50% of #delta_{CP} values)","F")
+l1.AddEntry(cpv_dcpmax_nom_gray, "Reference Near Detector","L")
+l1.AddEntry(cpv_dcpmax_LArND_gray,"ND-LAr + TMS","L")
+l1.AddEntry(cpv_dcpmax_nospect_gray,"ND-LAr (no spectrometer)","L")
+l1.SetBorderSize(0)
+l1.SetFillColor(0)
+l1.Draw("same")
+
+c5.Update()
+c5.Print("three_panel.png")
+c5.Print("three_panel.pdf")
 
